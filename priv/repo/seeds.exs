@@ -14,6 +14,7 @@ alias Survey.Penduduks.Penduduk
 
 Repo.insert!(%Penduduk{
   kode_unik: "6F82DB5F-BAA9-4475-8254-07721449B31F11",
+  nokk: "3577031303220002",
   nama: "WANINDRANI DEWI PRASETIJAWATI",
   nik: "3577036401670002",
   tanggal_lahir: ~D[1967-01-24],
@@ -27,6 +28,7 @@ Repo.insert!(%Penduduk{
 
 Repo.insert!(%Penduduk{
   kode_unik: "8A1912F6-A270-446C-B76B-ABDD9C6513D244",
+  nokk: "3577012004079501",
   nama: "DIDIK SUPRIYADI",
   nik: "3577013105980002",
   tanggal_lahir: ~D[1998-05-31],
@@ -40,6 +42,7 @@ Repo.insert!(%Penduduk{
 
 Repo.insert!(%Penduduk{
   kode_unik: "B0A1C6CD-888F-4226-88A8-E9BA03D1DE1833",
+  nokk: "3577012004070067",
   nama: "ANOI DWI DANCESTU",
   nik: "3577011004000001",
   tanggal_lahir: ~D[2000-04-10],
