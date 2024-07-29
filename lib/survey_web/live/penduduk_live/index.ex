@@ -22,13 +22,13 @@ defmodule SurveyWeb.PendudukLive.Index do
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Penduduk")
+    |> assign(:page_title, "Tambah Data Penduduk")
     |> assign(:penduduk, %Penduduk{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Penduduks")
+    |> assign(:page_title, "Data Penduduk")
     |> assign(:penduduk, nil)
   end
 

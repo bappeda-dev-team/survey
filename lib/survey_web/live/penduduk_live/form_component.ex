@@ -9,7 +9,6 @@ defmodule SurveyWeb.PendudukLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage penduduk records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -31,7 +30,7 @@ defmodule SurveyWeb.PendudukLive.FormComponent do
         <.input field={@form[:rt]} type="text" label="Rt" />
         <.input field={@form[:rw]} type="text" label="Rw" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Penduduk</.button>
+          <.button class="w-full" phx-disable-with="Saving...">Simpan Data Penduduk</.button>
         </:actions>
       </.simple_form>
     </div>
@@ -65,7 +64,7 @@ defmodule SurveyWeb.PendudukLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Penduduk updated successfully")
+         |> put_flash(:info, "Data Penduduk berhasil diperbarui")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -80,7 +79,7 @@ defmodule SurveyWeb.PendudukLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Penduduk created successfully")
+         |> put_flash(:info, "Data Penduduk Berhasil Dibuat")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
