@@ -18,6 +18,15 @@ defmodule SurveyWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    # penduduks
+    live "/penduduks", PendudukLive.Index, :index
+    live "/penduduks/new", PendudukLive.Index, :new
+    live "/penduduks/:id/edit", PendudukLive.Index, :edit
+
+    live "/penduduks/:id", PendudukLive.Show, :show
+    live "/penduduks/:id/show/edit", PendudukLive.Show, :edit
+    # end
   end
 
   # Other scopes may use custom stacks.

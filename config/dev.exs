@@ -1,10 +1,12 @@
 import Config
 
+database_url =
+  System.get_env("DATABASE_URL") ||
+    "ecto://@localhost/survey_dev"
+
 # Configure your database
 config :survey, Survey.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
+  url: database_url,
   database: "survey_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,

@@ -1,0 +1,36 @@
+<.header>
+  Penduduk <%= @penduduk.id %>
+  <:subtitle>This is a penduduk record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/penduduks/#{@penduduk}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit penduduk</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Kode unik"><%= @penduduk.kode_unik %></:item>
+  <:item title="Nik"><%= @penduduk.nik %></:item>
+  <:item title="Nokk"><%= @penduduk.nokk %></:item>
+  <:item title="Nama"><%= @penduduk.nama %></:item>
+  <:item title="Tanggal lahir"><%= @penduduk.tanggal_lahir %></:item>
+  <:item title="Jenis kelamin"><%= @penduduk.jenis_kelamin %></:item>
+  <:item title="Kelurahan"><%= @penduduk.kelurahan %></:item>
+  <:item title="Kecamatan"><%= @penduduk.kecamatan %></:item>
+  <:item title="Kota kab"><%= @penduduk.kota_kab %></:item>
+  <:item title="Rt"><%= @penduduk.rt %></:item>
+  <:item title="Rw"><%= @penduduk.rw %></:item>
+</.list>
+
+<.back navigate={~p"/penduduks"}>Back to penduduks</.back>
+
+<.modal :if={@live_action == :edit} id="penduduk-modal" show on_cancel={JS.patch(~p"/penduduks/#{@penduduk}")}>
+  <.live_component
+    module={SurveyWeb.PendudukLive.FormComponent}
+    id={@penduduk.id}
+    title={@page_title}
+    action={@live_action}
+    penduduk={@penduduk}
+    patch={~p"/penduduks/#{@penduduk}"}
+  />
+</.modal>
