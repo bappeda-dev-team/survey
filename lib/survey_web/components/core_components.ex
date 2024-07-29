@@ -81,6 +81,19 @@ defmodule SurveyWeb.CoreComponents do
               <div id={"#{@id}-content"}>
                 <%= render_slot(@inner_block) %>
               </div>
+              <div class="mt-3">
+                <button
+                  phx-click={JS.exec("data-cancel", to: "##{@id}")}
+                  type="button"
+                  class={[
+                    "w-full rounded-lg bg-red-500 hover:bg-red-300 py-2 px-3",
+                    "text-sm font-semibold leading-6 text-white active:text-white/80"
+                  ]}
+                  aria-label={gettext("close")}
+                >
+                  Batal
+                </button>
+              </div>
             </.focus_wrap>
           </div>
         </div>
