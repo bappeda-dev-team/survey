@@ -1,8 +1,8 @@
 <.header>
-  Listing Penduduks
+  Data Penduduk
   <:actions>
     <.link patch={~p"/penduduks/new"}>
-      <.button>New Penduduk</.button>
+      <.button>Tambah Data Penduduk</.button>
     </.link>
   </:actions>
 </.header>
@@ -13,33 +13,36 @@
   row_click={fn {_id, penduduk} -> JS.navigate(~p"/penduduks/#{penduduk}") end}
 >
   <:col :let={{_id, penduduk}} label="Kode unik"><%= penduduk.kode_unik %></:col>
-  <:col :let={{_id, penduduk}} label="Nik"><%= penduduk.nik %></:col>
-  <:col :let={{_id, penduduk}} label="Nokk"><%= penduduk.nokk %></:col>
   <:col :let={{_id, penduduk}} label="Nama"><%= penduduk.nama %></:col>
   <:col :let={{_id, penduduk}} label="Tanggal lahir"><%= penduduk.tanggal_lahir %></:col>
   <:col :let={{_id, penduduk}} label="Jenis kelamin"><%= penduduk.jenis_kelamin %></:col>
   <:col :let={{_id, penduduk}} label="Kelurahan"><%= penduduk.kelurahan %></:col>
   <:col :let={{_id, penduduk}} label="Kecamatan"><%= penduduk.kecamatan %></:col>
-  <:col :let={{_id, penduduk}} label="Kota kab"><%= penduduk.kota_kab %></:col>
-  <:col :let={{_id, penduduk}} label="Rt"><%= penduduk.rt %></:col>
-  <:col :let={{_id, penduduk}} label="Rw"><%= penduduk.rw %></:col>
+  <:col :let={{_id, penduduk}} label="Kota/Kab"><%= penduduk.kota_kab %></:col>
   <:action :let={{_id, penduduk}}>
     <div class="sr-only">
-      <.link navigate={~p"/penduduks/#{penduduk}"}>Show</.link>
+      <.link navigate={~p"/penduduks/#{penduduk}"}>Tampilkan</.link>
     </div>
     <.link patch={~p"/penduduks/#{penduduk}/edit"}>Edit</.link>
   </:action>
   <:action :let={{id, penduduk}}>
     <.link
       phx-click={JS.push("delete", value: %{id: penduduk.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm="Hapus data?"
     >
-      Delete
+      Hapus
     </.link>
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="penduduk-modal" show on_cancel={JS.patch(~p"/penduduks")}>
+<p class="my-5 text-sm text-gray-500 dark:text-white">klik untuk melihat detail penduduk</p>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="penduduk-modal"
+  show
+  on_cancel={JS.patch(~p"/penduduks")}
+>
   <.live_component
     module={SurveyWeb.PendudukLive.FormComponent}
     id={@penduduk.id || :new}
