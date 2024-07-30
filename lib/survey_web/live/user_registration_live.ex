@@ -8,13 +8,12 @@ defmodule SurveyWeb.UserRegistrationLive do
     ~H"""
     <div class="mx-auto max-w-sm">
       <.header class="text-center">
-        Register for an account
+        Register akun baru
         <:subtitle>
-          Already registered?
+          Sudah memiliki akun?
           <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
-            Log in
+            Log in disini.
           </.link>
-          to your account now.
         </:subtitle>
       </.header>
 
@@ -28,14 +27,14 @@ defmodule SurveyWeb.UserRegistrationLive do
         method="post"
       >
         <.error :if={@check_errors}>
-          Oops, something went wrong! Please check the errors below.
+          Terjadi kesalahan! harap periksa form.
         </.error>
 
         <.input field={@form[:email]} type="email" label="Email" required />
         <.input field={@form[:password]} type="password" label="Password" required />
 
         <:actions>
-          <.button phx-disable-with="Creating account..." class="w-full">Create an account</.button>
+          <.button phx-disable-with="Proses akun baru..." class="w-full">Register akun</.button>
         </:actions>
       </.simple_form>
     </div>

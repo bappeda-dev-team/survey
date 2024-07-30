@@ -5,13 +5,12 @@ defmodule SurveyWeb.UserLoginLive do
     ~H"""
     <div class="mx-auto max-w-sm">
       <.header class="text-center">
-        Log in to account
+        Log in ke akun
         <:subtitle>
-          Don't have an account?
+          Belum memiliki akun?
           <.link navigate={~p"/users/register"} class="font-semibold text-brand hover:underline">
-            Sign up
+            Klik disini untuk membuat akun.
           </.link>
-          for an account now.
         </:subtitle>
       </.header>
 
@@ -20,13 +19,13 @@ defmodule SurveyWeb.UserLoginLive do
         <.input field={@form[:password]} type="password" label="Password" required />
 
         <:actions>
-          <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
+          <.input field={@form[:remember_me]} type="checkbox" label="Tetap login" />
           <.link href={~p"/users/reset_password"} class="text-sm font-semibold">
-            Forgot your password?
+            Lupa password?
           </.link>
         </:actions>
         <:actions>
-          <.button phx-disable-with="Logging in..." class="w-full">
+          <.button phx-disable-with="Proses log in..." class="w-full">
             Log in <span aria-hidden="true">→</span>
           </.button>
         </:actions>
