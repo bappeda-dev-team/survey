@@ -1,0 +1,44 @@
+<.header>
+  Daftar OPD
+  <:actions>
+    <.link patch={~p"/opds/new"}>
+      <.button>Tambah Data OPD</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="opds"
+  rows={@streams.opds}
+  row_click={fn {_id, opd} -> JS.navigate(~p"/opds/#{opd}") end}
+>
+  <:col :let={{_id, opd}} label="Nama OPD"><%= opd.nama_opd %></:col>
+  <:col :let={{_id, opd}} label="Kode OPD"><%= opd.kode_opd %></:col>
+  <:action :let={{_id, opd}}>
+    <div class="sr-only">
+      <.link navigate={~p"/opds/#{opd}"}>Tampilkan</.link>
+    </div>
+    <.link patch={~p"/opds/#{opd}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, opd}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: opd.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Hapus
+    </.link>
+  </:action>
+</.table>
+
+<p class="my-5 text-sm text-gray-500 dark:text-white">klik untuk melihat detail opd</p>
+
+<.modal :if={@live_action in [:new, :edit]} id="opd-modal" show on_cancel={JS.patch(~p"/opds")}>
+  <.live_component
+    module={SurveyWeb.OpdLive.FormComponent}
+    id={@opd.id || :new}
+    title={@page_title}
+    action={@live_action}
+    opd={@opd}
+    patch={~p"/opds"}
+  />
+</.modal>

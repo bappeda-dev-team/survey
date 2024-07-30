@@ -78,6 +78,14 @@ defmodule SurveyWeb.Router do
 
       live "/penduduks/:id", PendudukLive.Show, :show
       live "/penduduks/:id/show/edit", PendudukLive.Show, :edit
+
+      # opds
+      live "/opds", OpdLive.Index, :index
+      live "/opds/new", OpdLive.Index, :new
+      live "/opds/:id/edit", OpdLive.Index, :edit
+
+      live "/opds/:id", OpdLive.Show, :show
+      live "/opds/:id/show/edit", OpdLive.Show, :edit
     end
   end
 

@@ -1,0 +1,27 @@
+<.header>
+  Detail OPD
+  <:actions>
+    <.link patch={~p"/opds/#{@opd}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit Data OPD</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Nama opd"><%= @opd.nama_opd %></:item>
+  <:item title="Kode opd"><%= @opd.kode_opd %></:item>
+  <:item title="Aktif"><%= @opd.aktif %></:item>
+</.list>
+
+<.back navigate={~p"/opds"}>Kembali</.back>
+
+<.modal :if={@live_action == :edit} id="opd-modal" show on_cancel={JS.patch(~p"/opds/#{@opd}")}>
+  <.live_component
+    module={SurveyWeb.OpdLive.FormComponent}
+    id={@opd.id}
+    title={@page_title}
+    action={@live_action}
+    opd={@opd}
+    patch={~p"/opds/#{@opd}"}
+  />
+</.modal>
