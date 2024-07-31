@@ -5,7 +5,7 @@ defmodule Survey.Repo.Migrations.CreateBidangUrusans do
     create table(:bidang_urusans) do
       add :kode_bidang_urusan, :string
       add :nama_bidang_urusan, :string
-      add :aktif, :boolean, default: false, null: false
+      add :aktif, :boolean, default: true, null: false
       add :kode_urusan, references(:urusans, type: :string, column: :kode_urusan, on_delete: :restrict)
 
       timestamps(type: :utc_datetime)
