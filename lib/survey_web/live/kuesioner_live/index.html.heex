@@ -1,0 +1,53 @@
+<.header>
+  Daftar Kuesioner
+  <:actions>
+    <.link patch={~p"/kuesioners/new"}>
+      <.button>Tambah Data Kuesioner</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="kuesioners"
+  rows={@streams.kuesioners}
+  row_click={fn {_id, kuesioner} -> JS.navigate(~p"/kuesioners/#{kuesioner}") end}
+>
+  <:col :let={{_id, kuesioner}} label="Judul"><%= kuesioner.judul %></:col>
+  <:col :let={{_id, kuesioner}} label="Penyelenggara"><%= kuesioner.penyelenggara %></:col>
+  <:col :let={{_id, kuesioner}} label="Tahun"><%= kuesioner.tahun %></:col>
+  <:col :let={{_id, kuesioner}} label="Deskripsi"><%= kuesioner.deskripsi %></:col>
+  <:action :let={{_id, kuesioner}}>
+    <div class="sr-only">
+      <.link navigate={~p"/kuesioners/#{kuesioner}"}>Tampilkan</.link>
+    </div>
+    <.link patch={~p"/kuesioners/#{kuesioner}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, kuesioner}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: kuesioner.id}) |> hide("##{id}")}
+      data-confirm="Hapus kuesioner?"
+    >
+      Hapus
+    </.link>
+  </:action>
+</.table>
+
+<%= if Enum.count(@streams.kuesioners) > 0 do %>
+  <p class="my-5 text-sm text-gray-500 dark:text-white">klik untuk melihat detail kuesioner</p>
+<% end %>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="kuesioner-modal"
+  show
+  on_cancel={JS.patch(~p"/kuesioners")}
+>
+  <.live_component
+    module={SurveyWeb.KuesionerLive.FormComponent}
+    id={@kuesioner.id || :new}
+    title={@page_title}
+    action={@live_action}
+    kuesioner={@kuesioner}
+    patch={~p"/kuesioners"}
+  />
+</.modal>

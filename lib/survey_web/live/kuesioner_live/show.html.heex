@@ -1,0 +1,33 @@
+<.header>
+  Kuesioner <%= @kuesioner.judul %>
+  <:actions>
+    <.link patch={~p"/kuesioners/#{@kuesioner}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit Data Kuesioner</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Judul"><%= @kuesioner.judul %></:item>
+  <:item title="Penyelenggara"><%= @kuesioner.penyelenggara %></:item>
+  <:item title="Tahun"><%= @kuesioner.tahun %></:item>
+  <:item title="Deskripsi"><%= @kuesioner.deskripsi %></:item>
+</.list>
+
+<.back navigate={~p"/kuesioners"}>Kembali</.back>
+
+<.modal
+  :if={@live_action == :edit}
+  id="kuesioner-modal"
+  show
+  on_cancel={JS.patch(~p"/kuesioners/#{@kuesioner}")}
+>
+  <.live_component
+    module={SurveyWeb.KuesionerLive.FormComponent}
+    id={@kuesioner.id}
+    title={@page_title}
+    action={@live_action}
+    kuesioner={@kuesioner}
+    patch={~p"/kuesioners/#{@kuesioner}"}
+  />
+</.modal>

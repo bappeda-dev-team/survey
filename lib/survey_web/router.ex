@@ -96,13 +96,20 @@ defmodule SurveyWeb.Router do
       live "/urusans/:id/show/edit", UrusanLive.Show, :edit
 
       # bidang urusans
-
       live "/bidang_urusans", BidangUrusanLive.Index, :index
       live "/bidang_urusans/new", BidangUrusanLive.Index, :new
       live "/bidang_urusans/:id/edit", BidangUrusanLive.Index, :edit
 
       live "/bidang_urusans/:id", BidangUrusanLive.Show, :show
       live "/bidang_urusans/:id/show/edit", BidangUrusanLive.Show, :edit
+
+      # kuesioners
+      live "/kuesioners", KuesionerLive.Index, :index
+      live "/kuesioners/new", KuesionerLive.Index, :new
+      live "/kuesioners/:id/edit", KuesionerLive.Index, :edit
+
+      live "/kuesioners/:id", KuesionerLive.Show, :show
+      live "/kuesioners/:id/show/edit", KuesionerLive.Show, :edit
     end
   end
 
