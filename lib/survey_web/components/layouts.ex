@@ -11,4 +11,10 @@ defmodule SurveyWeb.Layouts do
   use SurveyWeb, :html
 
   embed_templates "layouts/*"
+
+  def navhead(assigns)
+
+  def sidebar(assigns)
+
+  def footer(assigns)
 end
