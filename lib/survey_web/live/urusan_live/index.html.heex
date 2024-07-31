@@ -1,8 +1,8 @@
 <.header>
-  Listing Urusans
+  Master Urusan
   <:actions>
     <.link patch={~p"/urusans/new"}>
-      <.button>New Urusan</.button>
+      <.button>Tambah Data Urusan</.button>
     </.link>
   </:actions>
 </.header>
@@ -14,24 +14,30 @@
 >
   <:col :let={{_id, urusan}} label="Kode urusan"><%= urusan.kode_urusan %></:col>
   <:col :let={{_id, urusan}} label="Nama urusan"><%= urusan.nama_urusan %></:col>
-  <:col :let={{_id, urusan}} label="Aktif"><%= urusan.aktif %></:col>
   <:action :let={{_id, urusan}}>
     <div class="sr-only">
-      <.link navigate={~p"/urusans/#{urusan}"}>Show</.link>
+      <.link navigate={~p"/urusans/#{urusan}"}>Tampilkan</.link>
     </div>
     <.link patch={~p"/urusans/#{urusan}/edit"}>Edit</.link>
   </:action>
   <:action :let={{id, urusan}}>
     <.link
       phx-click={JS.push("delete", value: %{id: urusan.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm="Hapus data?"
     >
-      Delete
+      Hapus
     </.link>
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="urusan-modal" show on_cancel={JS.patch(~p"/urusans")}>
+<p class="my-5 text-sm text-gray-500 dark:text-white">klik untuk melihat detail urusan</p>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="urusan-modal"
+  show
+  on_cancel={JS.patch(~p"/urusans")}
+>
   <.live_component
     module={SurveyWeb.UrusanLive.FormComponent}
     id={@urusan.id || :new}

@@ -22,13 +22,13 @@ defmodule SurveyWeb.UrusanLive.Index do
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Urusan")
+    |> assign(:page_title, "Tambah Data Urusan")
     |> assign(:urusan, %Urusan{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Urusans")
+    |> assign(:page_title, "Master Urusan")
     |> assign(:urusan, nil)
   end
 

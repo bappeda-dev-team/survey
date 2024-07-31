@@ -1,9 +1,8 @@
 <.header>
-  Urusan <%= @urusan.id %>
-  <:subtitle>This is a urusan record from your database.</:subtitle>
+  Detail Urusan
   <:actions>
     <.link patch={~p"/urusans/#{@urusan}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit urusan</.button>
+      <.button>Edit Data urusan</.button>
     </.link>
   </:actions>
 </.header>
@@ -14,9 +13,28 @@
   <:item title="Aktif"><%= @urusan.aktif %></:item>
 </.list>
 
-<.back navigate={~p"/urusans"}>Back to urusans</.back>
+<div id="bidang-urusans-urusan#{@urusan.id}" class="my-16">
+  <.header>
+    Bidang Urusan
+  </.header>
+  <.table id="bidang-urusans" rows={@urusan.bidang_urusans}>
+    <:col :let={bidang_urusan} label="Kode bidang urusan">
+      <%= bidang_urusan.kode_bidang_urusan %>
+    </:col>
+    <:col :let={bidang_urusan} label="Nama bidang urusan">
+      <%= bidang_urusan.nama_bidang_urusan %>
+    </:col>
+  </.table>
+</div>
 
-<.modal :if={@live_action == :edit} id="urusan-modal" show on_cancel={JS.patch(~p"/urusans/#{@urusan}")}>
+<.back navigate={~p"/urusans"}>Kembali</.back>
+
+<.modal
+  :if={@live_action == :edit}
+  id="urusan-modal"
+  show
+  on_cancel={JS.patch(~p"/urusans/#{@urusan}")}
+>
   <.live_component
     module={SurveyWeb.UrusanLive.FormComponent}
     id={@urusan.id}

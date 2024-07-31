@@ -131,7 +131,7 @@ defmodule Survey.Opds do
       ** (Ecto.NoResultsError)
 
   """
-  def get_urusan!(id), do: Repo.get!(Urusan, id)
+  def get_urusan!(id), do: Repo.get!(Urusan, id) |> Repo.preload(:bidang_urusans)
 
   @doc """
   Creates a urusan.
@@ -227,7 +227,10 @@ defmodule Survey.Opds do
       ** (Ecto.NoResultsError)
 
   """
-  def get_bidang_urusan!(id), do: Repo.get!(BidangUrusan, id)
+  def get_bidang_urusan!(id) do
+    Repo.get!(BidangUrusan, id)
+    |> Repo.preload(:urusan)
+  end
 
   @doc """
   Creates a bidang_urusan.

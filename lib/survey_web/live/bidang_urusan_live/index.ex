@@ -22,13 +22,13 @@ defmodule SurveyWeb.BidangUrusanLive.Index do
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Bidang urusan")
+    |> assign(:page_title, "Tambah Data Bidang urusan")
     |> assign(:bidang_urusan, %BidangUrusan{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Bidang urusans")
+    |> assign(:page_title, "Master Bidang Urusan")
     |> assign(:bidang_urusan, nil)
   end
 

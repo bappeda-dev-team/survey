@@ -9,7 +9,6 @@ defmodule SurveyWeb.UrusanLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage urusan records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -21,9 +20,8 @@ defmodule SurveyWeb.UrusanLive.FormComponent do
       >
         <.input field={@form[:kode_urusan]} type="text" label="Kode urusan" />
         <.input field={@form[:nama_urusan]} type="text" label="Nama urusan" />
-        <.input field={@form[:aktif]} type="checkbox" label="Aktif" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Urusan</.button>
+          <.button class="w-full" phx-disable-with="Menyimpan...">Simpan Data Urusan</.button>
         </:actions>
       </.simple_form>
     </div>
@@ -57,7 +55,7 @@ defmodule SurveyWeb.UrusanLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Urusan updated successfully")
+         |> put_flash(:info, "Data Urusan Berhasil Diperbarui")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -72,7 +70,7 @@ defmodule SurveyWeb.UrusanLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Urusan created successfully")
+         |> put_flash(:info, "Data Urusan Berhasil Dibuat")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

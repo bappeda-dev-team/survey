@@ -23,7 +23,7 @@
   <:action :let={{id, opd}}>
     <.link
       phx-click={JS.push("delete", value: %{id: opd.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm="Hapus data?"
     >
       Hapus
     </.link>

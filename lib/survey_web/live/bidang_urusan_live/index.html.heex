@@ -1,8 +1,8 @@
 <.header>
-  Listing Bidang urusans
+  Master Bidang Urusan
   <:actions>
     <.link patch={~p"/bidang_urusans/new"}>
-      <.button>New Bidang urusan</.button>
+      <.button>Tambah Data Bidang Urusan</.button>
     </.link>
   </:actions>
 </.header>
@@ -12,26 +12,36 @@
   rows={@streams.bidang_urusans}
   row_click={fn {_id, bidang_urusan} -> JS.navigate(~p"/bidang_urusans/#{bidang_urusan}") end}
 >
-  <:col :let={{_id, bidang_urusan}} label="Kode bidang urusan"><%= bidang_urusan.kode_bidang_urusan %></:col>
-  <:col :let={{_id, bidang_urusan}} label="Nama bidang urusan"><%= bidang_urusan.nama_bidang_urusan %></:col>
-  <:col :let={{_id, bidang_urusan}} label="Aktif"><%= bidang_urusan.aktif %></:col>
+  <:col :let={{_id, bidang_urusan}} label="Kode bidang urusan">
+    <%= bidang_urusan.kode_bidang_urusan %>
+  </:col>
+  <:col :let={{_id, bidang_urusan}} label="Nama bidang urusan">
+    <%= bidang_urusan.nama_bidang_urusan %>
+  </:col>
   <:action :let={{_id, bidang_urusan}}>
     <div class="sr-only">
-      <.link navigate={~p"/bidang_urusans/#{bidang_urusan}"}>Show</.link>
+      <.link navigate={~p"/bidang_urusans/#{bidang_urusan}"}>Tampilkan</.link>
     </div>
     <.link patch={~p"/bidang_urusans/#{bidang_urusan}/edit"}>Edit</.link>
   </:action>
   <:action :let={{id, bidang_urusan}}>
     <.link
       phx-click={JS.push("delete", value: %{id: bidang_urusan.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
+      data-confirm="Hapus data?"
     >
-      Delete
+      Hapus
     </.link>
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="bidang_urusan-modal" show on_cancel={JS.patch(~p"/bidang_urusans")}>
+<p class="my-5 text-sm text-gray-500 dark:text-white">klik untuk melihat detail bidang urusan</p>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="bidang_urusan-modal"
+  show
+  on_cancel={JS.patch(~p"/bidang_urusans")}
+>
   <.live_component
     module={SurveyWeb.BidangUrusanLive.FormComponent}
     id={@bidang_urusan.id || :new}

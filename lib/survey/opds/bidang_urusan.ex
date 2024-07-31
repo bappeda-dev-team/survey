@@ -9,6 +9,11 @@ defmodule Survey.Opds.BidangUrusan do
     field :kode_urusan, :string
 
     timestamps(type: :utc_datetime)
+
+    belongs_to :urusan, Survey.Opds.Urusan,
+      foreign_key: :kode_urusan,
+      references: :kode_urusan,
+      define_field: false
   end
 
   @doc false

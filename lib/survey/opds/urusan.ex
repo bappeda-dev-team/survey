@@ -8,6 +8,10 @@ defmodule Survey.Opds.Urusan do
     field :aktif, :boolean, default: true
 
     timestamps(type: :utc_datetime)
+
+    has_many :bidang_urusans, Survey.Opds.BidangUrusan,
+      foreign_key: :kode_urusan,
+      references: :kode_urusan
   end
 
   @doc false
