@@ -4,6 +4,7 @@ To start your Phoenix server:
 
   * Create .envrc
   * add `export DATABASE_URL=ecto://username:passwrod@host:5432/db_name` to .envrc
+  * **for test** add `export DATABASE_TEST_URL=ecto://username:passwrod@host:5432/db_test_name` to .envrc
   * add `export PORT=4000` to .envrc
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
