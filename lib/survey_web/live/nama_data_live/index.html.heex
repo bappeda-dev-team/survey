@@ -35,6 +35,10 @@
   </:action>
 </.table>
 
+<%= if Enum.count(@streams.nama_datas) > 0 do %>
+  <p class="my-5 text-sm text-gray-500 dark:text-white">klik untuk melihat detail data</p>
+<% end %>
+
 <.modal
   :if={@live_action in [:new, :edit]}
   id="nama_data-modal"
