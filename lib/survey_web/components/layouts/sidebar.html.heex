@@ -8,7 +8,7 @@
       <%= if @current_user do %>
         <li>
           <.link
-            navigate="/"
+            href="/"
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
@@ -41,7 +41,8 @@
         </li>
         <li>
           <.link
-            navigate="/penduduks/"
+            navigate={~p"/penduduks"}
+            replace={true}
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
@@ -65,8 +66,9 @@
           </.link>
         </li>
         <li>
-          <a
-            href="/opds"
+          <.link
+            navigate={~p"/opds"}
+            replace={true}
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
@@ -88,11 +90,12 @@
             </svg>
 
             <span class="flex-1 ms-3 whitespace-nowrap">OPD</span>
-          </a>
+          </.link>
         </li>
         <li>
-          <a
-            href="/urusans"
+          <.link
+            navigate={~p"/urusans"}
+            replace={true}
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
@@ -114,11 +117,12 @@
             </svg>
 
             <span class="flex-1 ms-3 whitespace-nowrap">Master Urusan</span>
-          </a>
+          </.link>
         </li>
         <li>
-          <a
-            href="/bidang_urusans"
+          <.link
+            navigate={~p"/bidang_urusans"}
+            replace={true}
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
@@ -140,11 +144,12 @@
             </svg>
 
             <span class="flex-1 ms-3 whitespace-nowrap">Master Bidang Urusan</span>
-          </a>
+          </.link>
         </li>
         <li>
-          <a
-            href="/kuesioners"
+          <.link
+            navigate={~p"/kuesioners"}
+            replace={true}
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
@@ -165,7 +170,34 @@
               />
             </svg>
             <span class="flex-1 ms-3 whitespace-nowrap">Kuesioner</span>
-          </a>
+          </.link>
+        </li>
+        <li>
+          <.link
+            navigate={~p"/nama_datas"}
+            replace={true}
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <svg
+              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4"
+              />
+            </svg>
+
+            <span class="flex-1 ms-3 whitespace-nowrap">Master Nama Data</span>
+          </.link>
         </li>
         <li>
           <.link
