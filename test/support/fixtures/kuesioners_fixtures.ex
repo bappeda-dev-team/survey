@@ -20,4 +20,22 @@ defmodule Survey.KuesionersFixtures do
 
     kuesioner
   end
+
+  @doc """
+  Generate a nama_data.
+  """
+  def nama_data_fixture(attrs \\ %{}) do
+    {:ok, nama_data} =
+      attrs
+      |> Enum.into(%{
+        keterangan: "some keterangan",
+        kode_bidang_urusan: "some kode_bidang_urusan",
+        konsep: "some konsep",
+        metodologi: "some metodologi",
+        nama_data: "some nama_data"
+      })
+      |> Survey.Kuesioners.create_nama_data()
+
+    nama_data
+  end
 end

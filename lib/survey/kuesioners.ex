@@ -101,4 +101,101 @@ defmodule Survey.Kuesioners do
   def change_kuesioner(%Kuesioner{} = kuesioner, attrs \\ %{}) do
     Kuesioner.changeset(kuesioner, attrs)
   end
+
+  alias Survey.Kuesioners.NamaData
+
+  @doc """
+  Returns the list of nama_datas.
+
+  ## Examples
+
+      iex> list_nama_datas()
+      [%NamaData{}, ...]
+
+  """
+  def list_nama_datas do
+    Repo.all(NamaData)
+    |> Repo.preload(:bidang_urusan)
+  end
+
+  @doc """
+  Gets a single nama_data.
+
+  Raises `Ecto.NoResultsError` if the Nama data does not exist.
+
+  ## Examples
+
+      iex> get_nama_data!(123)
+      %NamaData{}
+
+      iex> get_nama_data!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_nama_data!(id), do: Repo.get!(NamaData, id) |> Repo.preload(:bidang_urusan)
+
+  @doc """
+  Creates a nama_data.
+
+  ## Examples
+
+      iex> create_nama_data(%{field: value})
+      {:ok, %NamaData{}}
+
+      iex> create_nama_data(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_nama_data(attrs \\ %{}) do
+    %NamaData{}
+    |> NamaData.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a nama_data.
+
+  ## Examples
+
+      iex> update_nama_data(nama_data, %{field: new_value})
+      {:ok, %NamaData{}}
+
+      iex> update_nama_data(nama_data, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_nama_data(%NamaData{} = nama_data, attrs) do
+    nama_data
+    |> NamaData.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a nama_data.
+
+  ## Examples
+
+      iex> delete_nama_data(nama_data)
+      {:ok, %NamaData{}}
+
+      iex> delete_nama_data(nama_data)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_nama_data(%NamaData{} = nama_data) do
+    Repo.delete(nama_data)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking nama_data changes.
+
+  ## Examples
+
+      iex> change_nama_data(nama_data)
+      %Ecto.Changeset{data: %NamaData{}}
+
+  """
+  def change_nama_data(%NamaData{} = nama_data, attrs \\ %{}) do
+    NamaData.changeset(nama_data, attrs)
+  end
 end

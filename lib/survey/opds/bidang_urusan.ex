@@ -24,4 +24,9 @@ defmodule Survey.Opds.BidangUrusan do
     |> unique_constraint(:nama_bidang_urusan)
     |> unique_constraint(:kode_bidang_urusan)
   end
+
+  @doc "shortcut gabungan kode dan nama bidang urusan. biasa digunakan untuk dropdown options"
+  def kode_nama(%{kode_bidang_urusan: kode, nama_bidang_urusan: nama} = bidang_urusan) do
+    "#{kode} - #{nama}"
+  end
 end

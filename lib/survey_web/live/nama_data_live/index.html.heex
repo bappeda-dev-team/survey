@@ -1,0 +1,52 @@
+<.header>
+  Daftar Nama Data Kuesioner
+  <:actions>
+    <.link patch={~p"/nama_datas/new"}>
+      <.button>Tambah Data</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="nama_datas"
+  rows={@streams.nama_datas}
+  row_click={fn {_id, nama_data} -> JS.navigate(~p"/nama_datas/#{nama_data}") end}
+>
+  <:col :let={{_id, nama_data}} label="Nama data"><%= nama_data.nama_data %></:col>
+  <:col :let={{_id, nama_data}} label="Konsep"><%= nama_data.konsep %></:col>
+  <:col :let={{_id, nama_data}} label="Metodologi"><%= nama_data.metodologi %></:col>
+  <:col :let={{_id, nama_data}} label="Keterangan"><%= nama_data.keterangan %></:col>
+  <:col :let={{_id, nama_data}} label="Bidang urusan">
+    <%= nama_data.bidang_urusan.nama_bidang_urusan %>
+  </:col>
+  <:action :let={{_id, nama_data}}>
+    <div class="sr-only">
+      <.link navigate={~p"/nama_datas/#{nama_data}"}>Tampilkan</.link>
+    </div>
+    <.link patch={~p"/nama_datas/#{nama_data}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, nama_data}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: nama_data.id}) |> hide("##{id}")}
+      data-confirm="Hapus data?"
+    >
+      Hapus
+    </.link>
+  </:action>
+</.table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="nama_data-modal"
+  show
+  on_cancel={JS.patch(~p"/nama_datas")}
+>
+  <.live_component
+    module={SurveyWeb.NamaDataLive.FormComponent}
+    id={@nama_data.id || :new}
+    title={@page_title}
+    action={@live_action}
+    nama_data={@nama_data}
+    patch={~p"/nama_datas"}
+  />
+</.modal>

@@ -1,0 +1,34 @@
+<.header>
+  <%= @nama_data.nama_data %>
+  <:actions>
+    <.link patch={~p"/nama_datas/#{@nama_data}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit Data</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Bidang Urusan"><%= @nama_data.bidang_urusan.nama_bidang_urusan %></:item>
+  <:item title="Nama data"><%= @nama_data.nama_data %></:item>
+  <:item title="Konsep"><%= @nama_data.konsep %></:item>
+  <:item title="Metodologi"><%= @nama_data.metodologi %></:item>
+  <:item title="Keterangan"><%= @nama_data.keterangan %></:item>
+</.list>
+
+<.back navigate={~p"/nama_datas"}>Kembali</.back>
+
+<.modal
+  :if={@live_action == :edit}
+  id="nama_data-modal"
+  show
+  on_cancel={JS.patch(~p"/nama_datas/#{@nama_data}")}
+>
+  <.live_component
+    module={SurveyWeb.NamaDataLive.FormComponent}
+    id={@nama_data.id}
+    title={@page_title}
+    action={@live_action}
+    nama_data={@nama_data}
+    patch={~p"/nama_datas/#{@nama_data}"}
+  />
+</.modal>
