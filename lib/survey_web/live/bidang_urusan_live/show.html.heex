@@ -1,0 +1,28 @@
+<.header>
+  Bidang urusan <%= @bidang_urusan.id %>
+  <:subtitle>This is a bidang_urusan record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/bidang_urusans/#{@bidang_urusan}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit bidang_urusan</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Kode bidang urusan"><%= @bidang_urusan.kode_bidang_urusan %></:item>
+  <:item title="Nama bidang urusan"><%= @bidang_urusan.nama_bidang_urusan %></:item>
+  <:item title="Aktif"><%= @bidang_urusan.aktif %></:item>
+</.list>
+
+<.back navigate={~p"/bidang_urusans"}>Back to bidang_urusans</.back>
+
+<.modal :if={@live_action == :edit} id="bidang_urusan-modal" show on_cancel={JS.patch(~p"/bidang_urusans/#{@bidang_urusan}")}>
+  <.live_component
+    module={SurveyWeb.BidangUrusanLive.FormComponent}
+    id={@bidang_urusan.id}
+    title={@page_title}
+    action={@live_action}
+    bidang_urusan={@bidang_urusan}
+    patch={~p"/bidang_urusans/#{@bidang_urusan}"}
+  />
+</.modal>

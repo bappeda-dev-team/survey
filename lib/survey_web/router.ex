@@ -86,6 +86,23 @@ defmodule SurveyWeb.Router do
 
       live "/opds/:id", OpdLive.Show, :show
       live "/opds/:id/show/edit", OpdLive.Show, :edit
+
+      # urusans
+      live "/urusans", UrusanLive.Index, :index
+      live "/urusans/new", UrusanLive.Index, :new
+      live "/urusans/:id/edit", UrusanLive.Index, :edit
+
+      live "/urusans/:id", UrusanLive.Show, :show
+      live "/urusans/:id/show/edit", UrusanLive.Show, :edit
+
+      # bidang urusans
+
+      live "/bidang_urusans", BidangUrusanLive.Index, :index
+      live "/bidang_urusans/new", BidangUrusanLive.Index, :new
+      live "/bidang_urusans/:id/edit", BidangUrusanLive.Index, :edit
+
+      live "/bidang_urusans/:id", BidangUrusanLive.Show, :show
+      live "/bidang_urusans/:id/show/edit", BidangUrusanLive.Show, :edit
     end
   end
 

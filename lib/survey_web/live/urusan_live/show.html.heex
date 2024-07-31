@@ -1,0 +1,28 @@
+<.header>
+  Urusan <%= @urusan.id %>
+  <:subtitle>This is a urusan record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/urusans/#{@urusan}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit urusan</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Kode urusan"><%= @urusan.kode_urusan %></:item>
+  <:item title="Nama urusan"><%= @urusan.nama_urusan %></:item>
+  <:item title="Aktif"><%= @urusan.aktif %></:item>
+</.list>
+
+<.back navigate={~p"/urusans"}>Back to urusans</.back>
+
+<.modal :if={@live_action == :edit} id="urusan-modal" show on_cancel={JS.patch(~p"/urusans/#{@urusan}")}>
+  <.live_component
+    module={SurveyWeb.UrusanLive.FormComponent}
+    id={@urusan.id}
+    title={@page_title}
+    action={@live_action}
+    urusan={@urusan}
+    patch={~p"/urusans/#{@urusan}"}
+  />
+</.modal>
