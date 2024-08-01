@@ -26,7 +26,7 @@ defmodule Survey.Opds.BidangUrusan do
   end
 
   @doc "shortcut gabungan kode dan nama bidang urusan. biasa digunakan untuk dropdown options"
-  def kode_nama(%{kode_bidang_urusan: kode, nama_bidang_urusan: nama} = bidang_urusan) do
+  def kode_nama(%{kode_bidang_urusan: kode, nama_bidang_urusan: nama} = _bidang_urusan) do
     "#{kode} - #{nama}"
   end
 end
