@@ -18,4 +18,8 @@ defmodule SurveyWeb.NamaDataLive.Show do
 
   defp page_title(:show), do: "Show Nama data"
   defp page_title(:edit), do: "Edit Nama data"
+
+  def bidang_urusan(%{bidang_urusan: bidang_urusan} = _assign) do
+    Survey.Opds.BidangUrusan.kode_nama(bidang_urusan)
+  end
 end
