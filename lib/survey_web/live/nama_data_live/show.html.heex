@@ -15,6 +15,17 @@
   <:item title="Keterangan"><%= @nama_data.keterangan %></:item>
 </.list>
 
+<div id="table-pertanyaans">
+  <.table id="pertanyaans" rows={@nama_data.pertanyaans}>
+    <:col :let={pertanyaan} label="Kode pertanyaan">
+      <%= pertanyaan.kode_pertanyaan %>
+    </:col>
+    <:col :let={pertanyaan} label="Pertanyaan">
+      <%= pertanyaan.pertanyaan %>
+    </:col>
+  </.table>
+</div>
+
 <.back navigate={~p"/nama_datas"}>Kembali</.back>
 
 <.modal

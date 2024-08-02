@@ -132,7 +132,8 @@ defmodule Survey.Kuesioners do
       ** (Ecto.NoResultsError)
 
   """
-  def get_nama_data!(id), do: Repo.get!(NamaData, id) |> Repo.preload(:bidang_urusan)
+  def get_nama_data!(id),
+    do: Repo.get!(NamaData, id) |> Repo.preload([:bidang_urusan, :pertanyaans])
 
   @doc """
   Creates a nama_data.

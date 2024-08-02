@@ -16,6 +16,8 @@ defmodule Survey.Kuesioners.NamaData do
       foreign_key: :kode_bidang_urusan,
       references: :kode_bidang_urusan,
       define_field: false
+
+    has_many :pertanyaans, Survey.Kuesioners.Pertanyaan
   end
 
   @doc false
