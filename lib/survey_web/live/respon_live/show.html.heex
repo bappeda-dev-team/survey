@@ -1,0 +1,28 @@
+<.header>
+  Respon <%= @respon.id %>
+  <:subtitle>This is a respon record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/respons/#{@respon}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit respon</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Kode peserta"><%= @respon.kode_peserta %></:item>
+  <:item title="Kode pertanyaan"><%= @respon.kode_pertanyaan %></:item>
+  <:item title="Respon"><%= @respon.respon %></:item>
+</.list>
+
+<.back navigate={~p"/respons"}>Back to respons</.back>
+
+<.modal :if={@live_action == :edit} id="respon-modal" show on_cancel={JS.patch(~p"/respons/#{@respon}")}>
+  <.live_component
+    module={SurveyWeb.ResponLive.FormComponent}
+    id={@respon.id}
+    title={@page_title}
+    action={@live_action}
+    respon={@respon}
+    patch={~p"/respons/#{@respon}"}
+  />
+</.modal>

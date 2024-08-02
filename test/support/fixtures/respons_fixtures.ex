@@ -21,4 +21,20 @@ defmodule Survey.ResponsFixtures do
 
     peserta
   end
+
+  @doc """
+  Generate a respon.
+  """
+  def respon_fixture(attrs \\ %{}) do
+    {:ok, respon} =
+      attrs
+      |> Enum.into(%{
+        kode_pertanyaan: "some kode_pertanyaan",
+        kode_peserta: "some kode_peserta",
+        respon: "some respon"
+      })
+      |> Survey.Respons.create_respon()
+
+    respon
+  end
 end

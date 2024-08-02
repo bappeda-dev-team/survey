@@ -18,7 +18,11 @@ defmodule Survey.Kuesioners.Pertanyaan do
     |> validate_required([:kode_pertanyaan, :pertanyaan, :nama_data_id])
   end
 
-  defp prefix_kode_pertanyaan(pertanyaan) do
-    "P-#{pertanyaan.id}"
+  # defp prefix_kode_pertanyaan(pertanyaan) do
+  #   "P-#{pertanyaan.id}"
+  # end
+
+  def respon_pertanyaan(%{kode_pertanyaan: kode_pertanyaan}) do
+    Survey.Respons.respons(kode_pertanyaan)
   end
 end

@@ -23,6 +23,11 @@
     <:col :let={pertanyaan} label="Pertanyaan">
       <%= pertanyaan.pertanyaan %>
     </:col>
+    <:action :let={pertanyaan}>
+      <.link navigate={~p"/pertanyaans/#{pertanyaan}"}>
+        <.button>Respons</.button>
+      </.link>
+    </:action>
   </.table>
 </div>
 

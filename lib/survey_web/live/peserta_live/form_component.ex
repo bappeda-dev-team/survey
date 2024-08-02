@@ -33,7 +33,7 @@ defmodule SurveyWeb.PesertaLive.FormComponent do
         <.input
           field={@form[:kode_peserta]}
           type="select"
-          options={peserta_penduduk_opts()}
+          options={Survey.Respons.penduduk_opts()}
           label="Kode peserta (identitas peserta)"
         />
         <.input field={@form[:nama_peserta]} type="text" label="Nama peserta" />
@@ -97,9 +97,4 @@ defmodule SurveyWeb.PesertaLive.FormComponent do
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
-
-  defp peserta_penduduk_opts() do
-    for pend <- Survey.Penduduks.list_penduduks(),
-        do: [key: Survey.Penduduks.nip_nama_penduduk(pend), value: pend.nik]
-  end
 end

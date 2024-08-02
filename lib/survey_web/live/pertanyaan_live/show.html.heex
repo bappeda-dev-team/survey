@@ -12,6 +12,17 @@
   <:item title="Pertanyaan"><%= @pertanyaan.pertanyaan %></:item>
 </.list>
 
+<div id="table-respons">
+  <.table id="respons" rows={Survey.Kuesioners.Pertanyaan.respon_pertanyaan(@pertanyaan)}>
+    <:col :let={respon} label="Peserta">
+      <%= respon.kode_peserta %>
+    </:col>
+    <:col :let={respon} label="Respons">
+      <%= respon.respon %>
+    </:col>
+  </.table>
+</div>
+
 <.back navigate={~p"/pertanyaans"}>Kembali</.back>
 
 <.modal

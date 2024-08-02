@@ -64,4 +64,62 @@ defmodule Survey.ResponsTest do
       assert %Ecto.Changeset{} = Respons.change_peserta(peserta)
     end
   end
+
+  describe "respons" do
+    alias Survey.Respons.Respon
+
+    import Survey.ResponsFixtures
+
+    @invalid_attrs %{kode_peserta: nil, kode_pertanyaan: nil, respon: nil}
+
+    test "list_respons/0 returns all respons" do
+      respon = respon_fixture()
+      assert Respons.list_respons() == [respon]
+    end
+
+    test "get_respon!/1 returns the respon with given id" do
+      respon = respon_fixture()
+      assert Respons.get_respon!(respon.id) == respon
+    end
+
+    test "create_respon/1 with valid data creates a respon" do
+      valid_attrs = %{kode_peserta: "some kode_peserta", kode_pertanyaan: "some kode_pertanyaan", respon: "some respon"}
+
+      assert {:ok, %Respon{} = respon} = Respons.create_respon(valid_attrs)
+      assert respon.kode_peserta == "some kode_peserta"
+      assert respon.kode_pertanyaan == "some kode_pertanyaan"
+      assert respon.respon == "some respon"
+    end
+
+    test "create_respon/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Respons.create_respon(@invalid_attrs)
+    end
+
+    test "update_respon/2 with valid data updates the respon" do
+      respon = respon_fixture()
+      update_attrs = %{kode_peserta: "some updated kode_peserta", kode_pertanyaan: "some updated kode_pertanyaan", respon: "some updated respon"}
+
+      assert {:ok, %Respon{} = respon} = Respons.update_respon(respon, update_attrs)
+      assert respon.kode_peserta == "some updated kode_peserta"
+      assert respon.kode_pertanyaan == "some updated kode_pertanyaan"
+      assert respon.respon == "some updated respon"
+    end
+
+    test "update_respon/2 with invalid data returns error changeset" do
+      respon = respon_fixture()
+      assert {:error, %Ecto.Changeset{}} = Respons.update_respon(respon, @invalid_attrs)
+      assert respon == Respons.get_respon!(respon.id)
+    end
+
+    test "delete_respon/1 deletes the respon" do
+      respon = respon_fixture()
+      assert {:ok, %Respon{}} = Respons.delete_respon(respon)
+      assert_raise Ecto.NoResultsError, fn -> Respons.get_respon!(respon.id) end
+    end
+
+    test "change_respon/1 returns a respon changeset" do
+      respon = respon_fixture()
+      assert %Ecto.Changeset{} = Respons.change_respon(respon)
+    end
+  end
 end
