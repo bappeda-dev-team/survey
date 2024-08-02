@@ -116,6 +116,7 @@ defmodule Survey.Kuesioners do
   def list_nama_datas do
     Repo.all(NamaData)
     |> Repo.preload(:bidang_urusan)
+    |> Enum.filter(fn nd -> not is_nil(nd.kode_bidang_urusan) end)
   end
 
   @doc """
@@ -212,7 +213,9 @@ defmodule Survey.Kuesioners do
 
   """
   def list_pertanyaans do
-    Repo.all(Pertanyaan) |> Repo.preload(:nama_data)
+    Repo.all(Pertanyaan)
+    |> Repo.preload(:nama_data)
+    |> Enum.filter(fn p -> not is_nil(p.nama_data_id) end)
   end
 
   @doc """
