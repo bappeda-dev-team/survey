@@ -1,0 +1,37 @@
+<.header>
+  Daftar Pertanyaan
+  <:actions>
+    <.link patch={~p"/pertanyaans/new"}>
+      <.button>Buat Pertanyaan Baru</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="pertanyaans" rows={@streams.pertanyaans} row_click={fn {_id, pertanyaan} ->
+  JS.navigate(~p"/pertanyaans/#{pertanyaan}") end}
+  >
+  <:col :let={{_id, pertanyaan}} label="Kode pertanyaan">
+    <%= pertanyaan.kode_pertanyaan %>
+  </:col>
+  <:col :let={{_id, pertanyaan}} label="Pertanyaan">
+    <%= pertanyaan.pertanyaan %>
+  </:col>
+  <:action :let={{_id, pertanyaan}}>
+    <div class="sr-only">
+      <.link navigate={~p"/pertanyaans/#{pertanyaan}"}>Tampilkan</.link>
+    </div>
+    <.link patch={~p"/pertanyaans/#{pertanyaan}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, pertanyaan}}>
+    <.link phx-click={JS.push("delete", value: %{id: pertanyaan.id}) |> hide("##{id}")}
+      data-confirm="Hapus pertanyaan?"
+      >
+      Hapus
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="pertanyaan-modal" show on_cancel={JS.patch(~p"/pertanyaans")}>
+  <.live_component module={SurveyWeb.PertanyaanLive.FormComponent} id={@pertanyaan.id || :new} title={@page_title}
+    action={@live_action} pertanyaan={@pertanyaan} patch={~p"/pertanyaans"} />
+</.modal>

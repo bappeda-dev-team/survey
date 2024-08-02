@@ -124,4 +124,60 @@ defmodule Survey.KuesionersTest do
       assert %Ecto.Changeset{} = Kuesioners.change_nama_data(nama_data)
     end
   end
+
+  describe "pertanyaans" do
+    alias Survey.Kuesioners.Pertanyaan
+
+    import Survey.KuesionersFixtures
+
+    @invalid_attrs %{kode_pertanyaan: nil, pertanyaan: nil}
+
+    test "list_pertanyaans/0 returns all pertanyaans" do
+      pertanyaan = pertanyaan_fixture()
+      assert Kuesioners.list_pertanyaans() == [pertanyaan]
+    end
+
+    test "get_pertanyaan!/1 returns the pertanyaan with given id" do
+      pertanyaan = pertanyaan_fixture()
+      assert Kuesioners.get_pertanyaan!(pertanyaan.id) == pertanyaan
+    end
+
+    test "create_pertanyaan/1 with valid data creates a pertanyaan" do
+      valid_attrs = %{kode_pertanyaan: "some kode_pertanyaan", pertanyaan: "some pertanyaan"}
+
+      assert {:ok, %Pertanyaan{} = pertanyaan} = Kuesioners.create_pertanyaan(valid_attrs)
+      assert pertanyaan.kode_pertanyaan == "some kode_pertanyaan"
+      assert pertanyaan.pertanyaan == "some pertanyaan"
+    end
+
+    test "create_pertanyaan/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Kuesioners.create_pertanyaan(@invalid_attrs)
+    end
+
+    test "update_pertanyaan/2 with valid data updates the pertanyaan" do
+      pertanyaan = pertanyaan_fixture()
+      update_attrs = %{kode_pertanyaan: "some updated kode_pertanyaan", pertanyaan: "some updated pertanyaan"}
+
+      assert {:ok, %Pertanyaan{} = pertanyaan} = Kuesioners.update_pertanyaan(pertanyaan, update_attrs)
+      assert pertanyaan.kode_pertanyaan == "some updated kode_pertanyaan"
+      assert pertanyaan.pertanyaan == "some updated pertanyaan"
+    end
+
+    test "update_pertanyaan/2 with invalid data returns error changeset" do
+      pertanyaan = pertanyaan_fixture()
+      assert {:error, %Ecto.Changeset{}} = Kuesioners.update_pertanyaan(pertanyaan, @invalid_attrs)
+      assert pertanyaan == Kuesioners.get_pertanyaan!(pertanyaan.id)
+    end
+
+    test "delete_pertanyaan/1 deletes the pertanyaan" do
+      pertanyaan = pertanyaan_fixture()
+      assert {:ok, %Pertanyaan{}} = Kuesioners.delete_pertanyaan(pertanyaan)
+      assert_raise Ecto.NoResultsError, fn -> Kuesioners.get_pertanyaan!(pertanyaan.id) end
+    end
+
+    test "change_pertanyaan/1 returns a pertanyaan changeset" do
+      pertanyaan = pertanyaan_fixture()
+      assert %Ecto.Changeset{} = Kuesioners.change_pertanyaan(pertanyaan)
+    end
+  end
 end

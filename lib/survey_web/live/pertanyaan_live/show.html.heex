@@ -1,0 +1,33 @@
+<.header>
+  Pertanyaan
+  <:subtitle>This is a pertanyaan record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/pertanyaans/#{@pertanyaan}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit Data Pertanyaan</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Nama Data"><%= @pertanyaan.nama_data.nama_data %></:item>
+  <:item title="Kode pertanyaan"><%= @pertanyaan.kode_pertanyaan %></:item>
+  <:item title="Pertanyaan"><%= @pertanyaan.pertanyaan %></:item>
+</.list>
+
+<.back navigate={~p"/pertanyaans"}>Kembali</.back>
+
+<.modal
+  :if={@live_action == :edit}
+  id="pertanyaan-modal"
+  show
+  on_cancel={JS.patch(~p"/pertanyaans/#{@pertanyaan}")}
+>
+  <.live_component
+    module={SurveyWeb.PertanyaanLive.FormComponent}
+    id={@pertanyaan.id}
+    title={@page_title}
+    action={@live_action}
+    pertanyaan={@pertanyaan}
+    patch={~p"/pertanyaans/#{@pertanyaan}"}
+  />
+</.modal>

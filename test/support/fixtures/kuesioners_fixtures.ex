@@ -38,4 +38,19 @@ defmodule Survey.KuesionersFixtures do
 
     nama_data
   end
+
+  @doc """
+  Generate a pertanyaan.
+  """
+  def pertanyaan_fixture(attrs \\ %{}) do
+    {:ok, pertanyaan} =
+      attrs
+      |> Enum.into(%{
+        kode_pertanyaan: "some kode_pertanyaan",
+        pertanyaan: "some pertanyaan"
+      })
+      |> Survey.Kuesioners.create_pertanyaan()
+
+    pertanyaan
+  end
 end
