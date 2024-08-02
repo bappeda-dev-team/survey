@@ -9,7 +9,6 @@ defmodule SurveyWeb.PertanyaanLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage pertanyaan records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -28,7 +27,7 @@ defmodule SurveyWeb.PertanyaanLive.FormComponent do
         <.input field={@form[:kode_pertanyaan]} type="text" label="Kode pertanyaan" />
         <.input field={@form[:pertanyaan]} type="text" label="Pertanyaan" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Pertanyaan</.button>
+          <.button class="w-full" phx-disable-with="Menyimpan...">Simpan</.button>
         </:actions>
       </.simple_form>
     </div>
