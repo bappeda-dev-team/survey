@@ -41,6 +41,10 @@
   </:action>
 </.table>
 
+<%= if Enum.count(@streams.pertanyaans) > 0 do %>
+  <p class="my-5 text-sm text-gray-500 dark:text-white">klik untuk melihat jawaban pertanyaan</p>
+<% end %>
+
 <.modal
   :if={@live_action in [:new, :edit]}
   id="pertanyaan-modal"

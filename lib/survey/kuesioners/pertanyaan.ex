@@ -17,4 +17,8 @@ defmodule Survey.Kuesioners.Pertanyaan do
     |> cast(attrs, [:kode_pertanyaan, :pertanyaan, :nama_data_id])
     |> validate_required([:kode_pertanyaan, :pertanyaan, :nama_data_id])
   end
+
+  defp prefix_kode_pertanyaan(pertanyaan) do
+    "P-#{pertanyaan.id}"
+  end
 end

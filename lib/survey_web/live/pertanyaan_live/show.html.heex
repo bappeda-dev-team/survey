@@ -1,6 +1,5 @@
 <.header>
-  Pertanyaan
-  <:subtitle>This is a pertanyaan record from your database.</:subtitle>
+  Pertanyaan <%= @pertanyaan.kode_pertanyaan %>
   <:actions>
     <.link patch={~p"/pertanyaans/#{@pertanyaan}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit Data Pertanyaan</.button>
@@ -10,7 +9,6 @@
 
 <.list>
   <:item title="Nama Data"><%= @pertanyaan.nama_data.nama_data %></:item>
-  <:item title="Kode pertanyaan"><%= @pertanyaan.kode_pertanyaan %></:item>
   <:item title="Pertanyaan"><%= @pertanyaan.pertanyaan %></:item>
 </.list>
 
