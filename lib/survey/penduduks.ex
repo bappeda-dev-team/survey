@@ -101,4 +101,8 @@ defmodule Survey.Penduduks do
   def change_penduduk(%Penduduk{} = penduduk, attrs \\ %{}) do
     Penduduk.changeset(penduduk, attrs)
   end
+
+  def nip_nama_penduduk(%{nik: nik, nama: nama}) do
+    "#{nik} - #{nama}"
+  end
 end

@@ -1,0 +1,33 @@
+<.header>
+  <:actions>
+    <.link patch={~p"/pesertas/#{@peserta}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit peserta</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Jenis identitas"><%= @peserta.jenis_identitas %></:item>
+  <:item title="Kode peserta"><%= @peserta.kode_peserta %></:item>
+  <:item title="Nama peserta"><%= @peserta.nama_peserta %></:item>
+  <:item title="Tahun"><%= @peserta.tahun %></:item>
+  <:item title="Keterangan"><%= @peserta.keterangan %></:item>
+</.list>
+
+<.back navigate={~p"/pesertas"}>Kembali</.back>
+
+<.modal
+  :if={@live_action == :edit}
+  id="peserta-modal"
+  show
+  on_cancel={JS.patch(~p"/pesertas/#{@peserta}")}
+>
+  <.live_component
+    module={SurveyWeb.PesertaLive.FormComponent}
+    id={@peserta.id}
+    title={@page_title}
+    action={@live_action}
+    peserta={@peserta}
+    patch={~p"/pesertas/#{@peserta}"}
+  />
+</.modal>

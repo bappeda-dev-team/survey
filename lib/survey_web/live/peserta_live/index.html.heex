@@ -1,0 +1,52 @@
+<.header>
+  List Peserta
+  <:actions>
+    <.link patch={~p"/pesertas/new"}>
+      <.button>Tambah Peserta</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="pesertas"
+  rows={@streams.pesertas}
+  row_click={fn {_id, peserta} -> JS.navigate(~p"/pesertas/#{peserta}") end}
+>
+  <:col :let={{_id, peserta}} label="Nama peserta"><%= peserta.nama_peserta %></:col>
+  <:col :let={{_id, peserta}} label="Kode peserta (identitas peserta)">
+    <%= peserta.kode_peserta %>
+  </:col>
+  <:col :let={{_id, peserta}} label="Jenis identitas"><%= peserta.jenis_identitas %></:col>
+  <:col :let={{_id, peserta}} label="Tahun"><%= peserta.tahun %></:col>
+  <:col :let={{_id, peserta}} label="Keterangan"><%= peserta.keterangan %></:col>
+  <:action :let={{_id, peserta}}>
+    <div class="sr-only">
+      <.link navigate={~p"/pesertas/#{peserta}"}>Tampilkan</.link>
+    </div>
+    <.link patch={~p"/pesertas/#{peserta}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, peserta}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: peserta.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Hapus
+    </.link>
+  </:action>
+</.table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="peserta-modal"
+  show
+  on_cancel={JS.patch(~p"/pesertas")}
+>
+  <.live_component
+    module={SurveyWeb.PesertaLive.FormComponent}
+    id={@peserta.id || :new}
+    title={@page_title}
+    action={@live_action}
+    peserta={@peserta}
+    patch={~p"/pesertas"}
+  />
+</.modal>

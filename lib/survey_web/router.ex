@@ -126,6 +126,14 @@ defmodule SurveyWeb.Router do
 
       live "/pertanyaans/:id", PertanyaanLive.Show, :show
       live "/pertanyaans/:id/show/edit", PertanyaanLive.Show, :edit
+
+      # peserta
+      live "/pesertas", PesertaLive.Index, :index
+      live "/pesertas/new", PesertaLive.Index, :new
+      live "/pesertas/:id/edit", PesertaLive.Index, :edit
+
+      live "/pesertas/:id", PesertaLive.Show, :show
+      live "/pesertas/:id/show/edit", PesertaLive.Show, :edit
     end
   end
 
