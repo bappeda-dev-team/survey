@@ -9,6 +9,8 @@ defmodule Survey.Kuesioners.Kuesioner do
     field :deskripsi, :string
 
     timestamps(type: :utc_datetime)
+
+    has_many :nama_datas, Survey.Kuesioners.NamaData
   end
 
   @doc false

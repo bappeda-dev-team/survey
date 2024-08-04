@@ -18,6 +18,12 @@ defmodule SurveyWeb.NamaDataLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
+        <.input
+          field={@form[:kuesioner_id]}
+          type="select"
+          options={kuesioner_opts()}
+          label="Kuesioner"
+        />
         <.input field={@form[:tahun]} type="select" options={tahun_opts()} label="Tahun" />
         <.input
           field={@form[:kode_bidang_urusan]}
@@ -26,8 +32,8 @@ defmodule SurveyWeb.NamaDataLive.FormComponent do
           label="Bidang urusan"
         />
         <.input field={@form[:nama_data]} type="text" label="Nama data" />
-        <.input field={@form[:konsep]} type="text" label="Konsep" />
-        <.input field={@form[:metodologi]} type="text" label="Metodologi" />
+        <.input field={@form[:konsep]} type="textarea" label="Konsep" />
+        <.input field={@form[:metodologi]} type="textarea" label="Metodologi" />
         <.input field={@form[:keterangan]} type="text" label="Keterangan" />
         <:actions>
           <.button class="w-full" phx-disable-with="Menyimpan...">Simpan Data</.button>
@@ -96,5 +102,10 @@ defmodule SurveyWeb.NamaDataLive.FormComponent do
 
   defp tahun_opts() do
     2019..2029
+  end
+
+  defp kuesioner_opts() do
+    for ks <- Survey.Kuesioners.list_kuesioners(),
+        do: [key: ks.judul, value: ks.id]
   end
 end

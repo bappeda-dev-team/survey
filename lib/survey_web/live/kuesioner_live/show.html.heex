@@ -14,6 +14,28 @@
   <:item title="Deskripsi"><%= @kuesioner.deskripsi %></:item>
 </.list>
 
+<div id="table-nama-data" class="my-16">
+  <.header>
+    Data Kuesioner
+  </.header>
+  <.table id="nama_datas" rows={@kuesioner.nama_datas}>
+    <:col :let={nama_data} label="Nama data"><%= nama_data.nama_data %></:col>
+    <:col :let={nama_data} label="Bidang urusan">
+      <%= nama_data.bidang_urusan.nama_bidang_urusan %>
+    </:col>
+    <:col :let={nama_data} label="Konsep"><%= nama_data.konsep %></:col>
+    <:col :let={nama_data} label="Metodologi"><%= nama_data.metodologi %></:col>
+    <:col :let={nama_data} label="Keterangan"><%= nama_data.keterangan %></:col>
+    <:col :let={nama_data} label="Tahun"><%= nama_data.tahun %></:col>
+    <:action :let={nama_data}>
+      <div class="sr-only">
+        <.link navigate={~p"/nama_datas/#{nama_data}"}>Tampilkan</.link>
+      </div>
+      <.link patch={~p"/nama_datas/#{nama_data}/edit"}>Edit</.link>
+    </:action>
+  </.table>
+</div>
+
 <.back navigate={~p"/kuesioners"}>Kembali</.back>
 
 <.modal

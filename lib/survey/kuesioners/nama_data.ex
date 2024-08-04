@@ -17,13 +17,23 @@ defmodule Survey.Kuesioners.NamaData do
       references: :kode_bidang_urusan,
       define_field: false
 
+    belongs_to :kuesioner, Survey.Kuesioners.Kuesioner
+
     has_many :pertanyaans, Survey.Kuesioners.Pertanyaan
   end
 
   @doc false
   def changeset(nama_data, attrs) do
     nama_data
-    |> cast(attrs, [:nama_data, :konsep, :metodologi, :kode_bidang_urusan, :keterangan, :tahun])
+    |> cast(attrs, [
+      :nama_data,
+      :konsep,
+      :metodologi,
+      :kode_bidang_urusan,
+      :keterangan,
+      :tahun,
+      :kuesioner_id
+    ])
     |> validate_required([:nama_data, :konsep, :metodologi, :kode_bidang_urusan, :tahun])
   end
 end

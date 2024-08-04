@@ -35,7 +35,8 @@ defmodule Survey.Kuesioners do
       ** (Ecto.NoResultsError)
 
   """
-  def get_kuesioner!(id), do: Repo.get!(Kuesioner, id)
+  def get_kuesioner!(id),
+    do: Repo.get!(Kuesioner, id) |> Repo.preload(nama_datas: [:bidang_urusan])
 
   @doc """
   Creates a kuesioner.

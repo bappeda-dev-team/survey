@@ -19,9 +19,9 @@ defmodule SurveyWeb.KuesionerLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:judul]} type="text" label="Judul" />
+        <.input field={@form[:tahun]} type="select" options={tahun_opts()} label="Tahun Pelaksanaan" />
         <.input field={@form[:penyelenggara]} type="text" label="Penyelenggara" />
-        <.input field={@form[:tahun]} type="number" label="Tahun" />
-        <.input field={@form[:deskripsi]} type="text" label="Deskripsi" />
+        <.input field={@form[:deskripsi]} type="textarea" label="Deskripsi" />
         <:actions>
           <.button class="w-full" phx-disable-with="Menyimpan...">Simpan</.button>
         </:actions>
@@ -81,4 +81,8 @@ defmodule SurveyWeb.KuesionerLive.FormComponent do
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
+
+  defp tahun_opts() do
+    2019..2029
+  end
 end
