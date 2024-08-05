@@ -1,0 +1,60 @@
+<.header>
+  Respon Kuesioner <%= @kuesioner.judul %> - Tahun <%= @kuesioner.tahun %>
+</.header>
+
+<div id="table-nama-data" class="my-16">
+  <%= for nama_data <- @kuesioner.nama_datas do %>
+    <.list>
+      <:item title="Bidang Urusan">
+        <%= SurveyWeb.NamaDataLive.Show.bidang_urusan(nama_data) %>
+      </:item>
+      <:item title="Nama data"><%= nama_data.nama_data %></:item>
+      <:item title="Konsep"><%= nama_data.konsep %></:item>
+      <:item title="Metodologi"><%= nama_data.metodologi %></:item>
+      <:item title="Keterangan"><%= nama_data.keterangan %></:item>
+    </.list>
+
+    <div class="overflow-y-auto px-4 sm:overflow-visible sm:px-0 my-16">
+      <.header>
+        Respons
+      </.header>
+      <table class="w-[40rem] mt-11 sm:w-full">
+        <thead class="text-sm text-left leading-6 text-zinc-500">
+          <tr>
+            <th class="p-0 pb-4 pr-6 font-semi-bold">
+              Nama Responden
+            </th>
+            <th :for={pertanyaan <- nama_data.pertanyaans} class="p-0 pb-4 pr-6 font-normal">
+              <%= pertanyaan.pertanyaan %>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="relative divide-y divide-zinc-100 border-t border-zinc-200 text-sm leading-6 text-zinc-700">
+          <tr :for={responden <- responden_kuesioner(nama_data.pertanyaans)} class="group">
+            <td class="relative p-0">
+              <div class="block py-4 pr-6">
+                <span class="absolute -inset-y-px right-0 -left-4 sm:rounded-l-xl" />
+                <span class="font-semi-bold">
+                  <%= nama_responden(kode_responden: responden.kode_peserta) %>
+                </span>
+              </div>
+            </td>
+            <td :for={pertanyaan <- nama_data.pertanyaans} class="relative p-0">
+              <div class="block py-4 pr-6">
+                <span class="absolute -inset-y-px right-0 -left-4 sm:rounded-l-xl" />
+                <span class="font-semi-bold">
+                  <%= respon_peserta(
+                    kode_pertanyaan: pertanyaan.kode_pertanyaan,
+                    kode_peserta: responden.kode_peserta
+                  ) %>
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+<.back navigate={~p"/kuesioners/#{@kuesioner}"}>Kembali</.back>

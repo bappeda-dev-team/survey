@@ -230,4 +230,34 @@ defmodule Survey.Respons do
 
     Repo.all(query)
   end
+
+  def list_responden(kode_pertanyaan) do
+    query =
+      from Respon,
+        where: [kode_pertanyaan: ^kode_pertanyaan],
+        select: [:kode_peserta]
+
+    Repo.all(query)
+  end
+
+  def respon_pertanyaan_peserta(kode_pertanyaan: kode_pertanyaan, kode_peserta: kode_peserta) do
+    query =
+      from r in Respon,
+        where: r.kode_pertanyaan == ^kode_pertanyaan,
+        where: r.kode_peserta == ^kode_peserta,
+        limit: 1,
+        select: r.respon
+
+    Repo.all(query)
+  end
+
+  def nama_responden(kode_responden: kode_responden) do
+    query =
+      from p in Survey.Penduduks.Penduduk,
+        where: p.nik == ^kode_responden,
+        limit: 1,
+        select: p.nama
+
+    Repo.all(query)
+  end
 end

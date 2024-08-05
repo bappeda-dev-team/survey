@@ -39,6 +39,35 @@ defmodule Survey.Kuesioners do
     do: Repo.get!(Kuesioner, id) |> Repo.preload(nama_datas: [:bidang_urusan])
 
   @doc """
+  Gets a single kuesioner with pertanyaan from nama_data.
+
+  Raises `Ecto.NoResultsError` if the Kuesioner does not exist.
+
+  ## Examples
+
+      iex> get_pertanyaan_kuesioner!(123)
+      %Kuesioner{
+      ....,
+      nama_datas:[
+        %Survey.Kuesioners.NamaData{
+          ....,
+          bidang_urusan: %Survey.Opds.BidangUrusan{....},
+          pertanyaans: [
+            %Survey.Kuesioners.Pertanyaan{
+            ...}]
+        }]
+      }
+
+      iex> get_pertanyaan_kuesioner!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_pertanyaan_kuesioner!(id) do
+    Repo.get!(Kuesioner, id)
+    |> Repo.preload(nama_datas: [:bidang_urusan, :pertanyaans])
+  end
+
+  @doc """
   Creates a kuesioner.
 
   ## Examples
