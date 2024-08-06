@@ -15,7 +15,15 @@
   <:item title="Keterangan"><%= @nama_data.keterangan %></:item>
 </.list>
 
-<div id="table-pertanyaans">
+<div id="table-pertanyaans" class="my-16">
+  <.header>
+    List Pertanyaan
+    <:actions>
+      <.link patch={~p"/nama_datas/#{@nama_data}/new_pertanyaan"}>
+        <.button class="bg-sky-500 hover:bg-sky-300">Tambah Pertanyaan</.button>
+      </.link>
+    </:actions>
+  </.header>
   <.table id="pertanyaans" rows={@nama_data.pertanyaans}>
     <:col :let={pertanyaan} label="Kode pertanyaan">
       <%= pertanyaan.kode_pertanyaan %>
@@ -45,6 +53,23 @@
     title={@page_title}
     action={@live_action}
     nama_data={@nama_data}
+    patch={~p"/nama_datas/#{@nama_data}"}
+  />
+</.modal>
+
+<.modal
+  :if={@live_action == :new_pertanyaan}
+  id="nama_data_new_pertanyaan-modal"
+  show
+  on_cancel={JS.patch(~p"/nama_datas/#{@nama_data}")}
+>
+  <.live_component
+    module={SurveyWeb.NamaDataLive.NewPertanyaan}
+    id={"pertanyaan-nama_data-#{@nama_data.id}"}
+    title={@page_title}
+    action={@live_action}
+    nama_data={@nama_data}
+    pertanyaan={@pertanyaan}
     patch={~p"/nama_datas/#{@nama_data}"}
   />
 </.modal>
