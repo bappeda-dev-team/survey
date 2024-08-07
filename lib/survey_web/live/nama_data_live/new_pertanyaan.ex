@@ -3,6 +3,7 @@ defmodule SurveyWeb.NamaDataLive.NewPertanyaan do
 
   alias Survey.Kuesioners
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div>
