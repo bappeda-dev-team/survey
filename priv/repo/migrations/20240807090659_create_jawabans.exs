@@ -11,7 +11,5 @@ defmodule Survey.Repo.Migrations.CreateJawabans do
 
       timestamps(type: :utc_datetime)
     end
-
-    create unique_index(:jawabans, [:kode_jawaban])
   end
 end

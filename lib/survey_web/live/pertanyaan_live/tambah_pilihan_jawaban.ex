@@ -2,7 +2,6 @@ defmodule SurveyWeb.PertanyaanLive.TambahPilihanJawaban do
   use SurveyWeb, :live_component
 
   alias Survey.Respons
-  alias Survey.Respons.Jawaban
 
   @impl true
   def render(assigns) do
