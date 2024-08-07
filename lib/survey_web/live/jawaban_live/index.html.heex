@@ -1,0 +1,45 @@
+<.header>
+  Listing Jawabans
+  <:actions>
+    <.link patch={~p"/jawabans/new"}>
+      <.button>New Jawaban</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="jawabans"
+  rows={@streams.jawabans}
+  row_click={fn {_id, jawaban} -> JS.navigate(~p"/jawabans/#{jawaban}") end}
+>
+  <:col :let={{_id, jawaban}} label="Kode pertanyaan"><%= jawaban.kode_pertanyaan %></:col>
+  <:col :let={{_id, jawaban}} label="Kode jawaban"><%= jawaban.kode_jawaban %></:col>
+  <:col :let={{_id, jawaban}} label="Jawaban"><%= jawaban.jawaban %></:col>
+  <:col :let={{_id, jawaban}} label="Skor"><%= jawaban.skor %></:col>
+  <:col :let={{_id, jawaban}} label="Bobot"><%= jawaban.bobot %></:col>
+  <:action :let={{_id, jawaban}}>
+    <div class="sr-only">
+      <.link navigate={~p"/jawabans/#{jawaban}"}>Show</.link>
+    </div>
+    <.link patch={~p"/jawabans/#{jawaban}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, jawaban}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: jawaban.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="jawaban-modal" show on_cancel={JS.patch(~p"/jawabans")}>
+  <.live_component
+    module={SurveyWeb.JawabanLive.FormComponent}
+    id={@jawaban.id || :new}
+    title={@page_title}
+    action={@live_action}
+    jawaban={@jawaban}
+    patch={~p"/jawabans"}
+  />
+</.modal>

@@ -260,4 +260,100 @@ defmodule Survey.Respons do
 
     Repo.all(query)
   end
+
+  alias Survey.Respons.Jawaban
+
+  @doc """
+  Returns the list of jawabans.
+
+  ## Examples
+
+      iex> list_jawabans()
+      [%Jawaban{}, ...]
+
+  """
+  def list_jawabans do
+    Repo.all(Jawaban)
+  end
+
+  @doc """
+  Gets a single jawaban.
+
+  Raises `Ecto.NoResultsError` if the Jawaban does not exist.
+
+  ## Examples
+
+      iex> get_jawaban!(123)
+      %Jawaban{}
+
+      iex> get_jawaban!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_jawaban!(id), do: Repo.get!(Jawaban, id)
+
+  @doc """
+  Creates a jawaban.
+
+  ## Examples
+
+      iex> create_jawaban(%{field: value})
+      {:ok, %Jawaban{}}
+
+      iex> create_jawaban(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_jawaban(attrs \\ %{}) do
+    %Jawaban{}
+    |> Jawaban.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a jawaban.
+
+  ## Examples
+
+      iex> update_jawaban(jawaban, %{field: new_value})
+      {:ok, %Jawaban{}}
+
+      iex> update_jawaban(jawaban, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_jawaban(%Jawaban{} = jawaban, attrs) do
+    jawaban
+    |> Jawaban.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a jawaban.
+
+  ## Examples
+
+      iex> delete_jawaban(jawaban)
+      {:ok, %Jawaban{}}
+
+      iex> delete_jawaban(jawaban)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_jawaban(%Jawaban{} = jawaban) do
+    Repo.delete(jawaban)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking jawaban changes.
+
+  ## Examples
+
+      iex> change_jawaban(jawaban)
+      %Ecto.Changeset{data: %Jawaban{}}
+
+  """
+  def change_jawaban(%Jawaban{} = jawaban, attrs \\ %{}) do
+    Jawaban.changeset(jawaban, attrs)
+  end
 end

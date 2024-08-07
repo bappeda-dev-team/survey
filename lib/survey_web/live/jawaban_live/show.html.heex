@@ -1,0 +1,30 @@
+<.header>
+  Jawaban <%= @jawaban.id %>
+  <:subtitle>This is a jawaban record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/jawabans/#{@jawaban}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit jawaban</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Kode pertanyaan"><%= @jawaban.kode_pertanyaan %></:item>
+  <:item title="Kode jawaban"><%= @jawaban.kode_jawaban %></:item>
+  <:item title="Jawaban"><%= @jawaban.jawaban %></:item>
+  <:item title="Skor"><%= @jawaban.skor %></:item>
+  <:item title="Bobot"><%= @jawaban.bobot %></:item>
+</.list>
+
+<.back navigate={~p"/jawabans"}>Back to jawabans</.back>
+
+<.modal :if={@live_action == :edit} id="jawaban-modal" show on_cancel={JS.patch(~p"/jawabans/#{@jawaban}")}>
+  <.live_component
+    module={SurveyWeb.JawabanLive.FormComponent}
+    id={@jawaban.id}
+    title={@page_title}
+    action={@live_action}
+    jawaban={@jawaban}
+    patch={~p"/jawabans/#{@jawaban}"}
+  />
+</.modal>

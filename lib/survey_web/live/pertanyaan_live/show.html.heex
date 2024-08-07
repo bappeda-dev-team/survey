@@ -12,13 +12,27 @@
   <:item title="Pertanyaan"><%= @pertanyaan.pertanyaan %></:item>
 </.list>
 
-<div id="table-respons">
-  <.table id="respons" rows={Survey.Kuesioners.Pertanyaan.respon_pertanyaan(@pertanyaan)}>
-    <:col :let={respon} label="Peserta">
-      <%= respon.kode_peserta %>
+<div id="table-jawabans" class="my-16">
+  <.header>
+    Pilihan Jawaban
+    <:actions>
+      <.link patch={~p"/pertanyaans/#{@pertanyaan}/tambah_jawaban"}>
+        <.button>Buat Pilihan Jawaban</.button>
+      </.link>
+    </:actions>
+  </.header>
+  <.table id="respons" rows={@pertanyaan.jawabans}>
+    <:col :let={jawaban} label="Kode Jawaban">
+      <%= jawaban.kode_jawaban %>
     </:col>
-    <:col :let={respon} label="Respons">
-      <%= respon.respon %>
+    <:col :let={jawaban} label="Jawaban">
+      <%= jawaban.jawaban %>
+    </:col>
+    <:col :let={jawaban} label="Skor">
+      <%= jawaban.skor %>
+    </:col>
+    <:col :let={jawaban} label="Bobot">
+      <%= jawaban.bobot %>
     </:col>
   </.table>
 </div>
@@ -37,6 +51,23 @@
     title={@page_title}
     action={@live_action}
     pertanyaan={@pertanyaan}
+    patch={~p"/pertanyaans/#{@pertanyaan}"}
+  />
+</.modal>
+
+<.modal
+  :if={@live_action == :tambah_jawaban}
+  id="tambah_jawaban-pertanyaan-modal"
+  show
+  on_cancel={JS.patch(~p"/pertanyaans/#{@pertanyaan}")}
+>
+  <.live_component
+    module={SurveyWeb.PertanyaanLive.TambahPilihanJawaban}
+    id={"tambah_jawaban-pertanyaan-#{@pertanyaan.id}"}
+    title={@page_title}
+    action={@live_action}
+    pertanyaan={@pertanyaan}
+    jawaban={@jawaban}
     patch={~p"/pertanyaans/#{@pertanyaan}"}
   />
 </.modal>

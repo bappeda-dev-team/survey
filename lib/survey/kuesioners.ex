@@ -262,7 +262,10 @@ defmodule Survey.Kuesioners do
       ** (Ecto.NoResultsError)
 
   """
-  def get_pertanyaan!(id), do: Repo.get!(Pertanyaan, id) |> Repo.preload(:nama_data)
+  def get_pertanyaan!(id) do
+    Repo.get!(Pertanyaan, id)
+    |> Repo.preload([:nama_data, :jawabans])
+  end
 
   @doc """
   Creates a pertanyaan.

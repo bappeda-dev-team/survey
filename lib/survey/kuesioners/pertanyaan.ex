@@ -9,6 +9,10 @@ defmodule Survey.Kuesioners.Pertanyaan do
     timestamps(type: :utc_datetime)
 
     belongs_to :nama_data, Survey.Kuesioners.NamaData
+
+    has_many :jawabans, Survey.Respons.Jawaban,
+      foreign_key: :kode_pertanyaan,
+      references: :kode_pertanyaan
   end
 
   @doc false

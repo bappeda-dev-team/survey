@@ -122,4 +122,66 @@ defmodule Survey.ResponsTest do
       assert %Ecto.Changeset{} = Respons.change_respon(respon)
     end
   end
+
+  describe "jawabans" do
+    alias Survey.Respons.Jawaban
+
+    import Survey.ResponsFixtures
+
+    @invalid_attrs %{kode_pertanyaan: nil, kode_jawaban: nil, jawaban: nil, skor: nil, bobot: nil}
+
+    test "list_jawabans/0 returns all jawabans" do
+      jawaban = jawaban_fixture()
+      assert Respons.list_jawabans() == [jawaban]
+    end
+
+    test "get_jawaban!/1 returns the jawaban with given id" do
+      jawaban = jawaban_fixture()
+      assert Respons.get_jawaban!(jawaban.id) == jawaban
+    end
+
+    test "create_jawaban/1 with valid data creates a jawaban" do
+      valid_attrs = %{kode_pertanyaan: "some kode_pertanyaan", kode_jawaban: "some kode_jawaban", jawaban: "some jawaban", skor: 42, bobot: 120.5}
+
+      assert {:ok, %Jawaban{} = jawaban} = Respons.create_jawaban(valid_attrs)
+      assert jawaban.kode_pertanyaan == "some kode_pertanyaan"
+      assert jawaban.kode_jawaban == "some kode_jawaban"
+      assert jawaban.jawaban == "some jawaban"
+      assert jawaban.skor == 42
+      assert jawaban.bobot == 120.5
+    end
+
+    test "create_jawaban/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Respons.create_jawaban(@invalid_attrs)
+    end
+
+    test "update_jawaban/2 with valid data updates the jawaban" do
+      jawaban = jawaban_fixture()
+      update_attrs = %{kode_pertanyaan: "some updated kode_pertanyaan", kode_jawaban: "some updated kode_jawaban", jawaban: "some updated jawaban", skor: 43, bobot: 456.7}
+
+      assert {:ok, %Jawaban{} = jawaban} = Respons.update_jawaban(jawaban, update_attrs)
+      assert jawaban.kode_pertanyaan == "some updated kode_pertanyaan"
+      assert jawaban.kode_jawaban == "some updated kode_jawaban"
+      assert jawaban.jawaban == "some updated jawaban"
+      assert jawaban.skor == 43
+      assert jawaban.bobot == 456.7
+    end
+
+    test "update_jawaban/2 with invalid data returns error changeset" do
+      jawaban = jawaban_fixture()
+      assert {:error, %Ecto.Changeset{}} = Respons.update_jawaban(jawaban, @invalid_attrs)
+      assert jawaban == Respons.get_jawaban!(jawaban.id)
+    end
+
+    test "delete_jawaban/1 deletes the jawaban" do
+      jawaban = jawaban_fixture()
+      assert {:ok, %Jawaban{}} = Respons.delete_jawaban(jawaban)
+      assert_raise Ecto.NoResultsError, fn -> Respons.get_jawaban!(jawaban.id) end
+    end
+
+    test "change_jawaban/1 returns a jawaban changeset" do
+      jawaban = jawaban_fixture()
+      assert %Ecto.Changeset{} = Respons.change_jawaban(jawaban)
+    end
+  end
 end
