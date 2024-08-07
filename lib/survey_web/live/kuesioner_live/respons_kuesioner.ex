@@ -33,11 +33,7 @@ defmodule SurveyWeb.KuesionerLive.ResponsKuesioner do
         kode_peserta: kode_peserta
       )
 
-    if Enum.empty?(respon) do
-      "-"
-    else
-      respon
-    end
+    if Enum.empty?(respon), do: "-", else: respon
   end
 
   def nama_responden(kode_responden: kode_responden) do
