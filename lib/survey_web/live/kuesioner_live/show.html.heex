@@ -22,6 +22,11 @@
 <div id="table-nama-data" class="my-16">
   <.header>
     Data Kuesioner
+    <:actions>
+      <.link patch={~p"/kuesioners/#{@kuesioner}/pilih_nama_data"} phx-click={JS.push_focus()}>
+        <.button class="!bg-sky-500 !hover:bg-sky-300">Pilih Nama Data</.button>
+      </.link>
+    </:actions>
   </.header>
   <.table id="nama_datas" rows={@kuesioner.nama_datas}>
     <:col :let={nama_data} label="Nama data"><%= nama_data.nama_data %></:col>
@@ -31,13 +36,6 @@
     <:col :let={nama_data} label="Konsep"><%= nama_data.konsep %></:col>
     <:col :let={nama_data} label="Metodologi"><%= nama_data.metodologi %></:col>
     <:col :let={nama_data} label="Keterangan"><%= nama_data.keterangan %></:col>
-    <:col :let={nama_data} label="Tahun"><%= nama_data.tahun %></:col>
-    <:action :let={nama_data}>
-      <div class="sr-only">
-        <.link navigate={~p"/nama_datas/#{nama_data}"}>Tampilkan</.link>
-      </div>
-      <.link patch={~p"/nama_datas/#{nama_data}/edit"}>Edit</.link>
-    </:action>
   </.table>
 </div>
 
@@ -52,6 +50,22 @@
   <.live_component
     module={SurveyWeb.KuesionerLive.FormComponent}
     id={@kuesioner.id}
+    title={@page_title}
+    action={@live_action}
+    kuesioner={@kuesioner}
+    patch={~p"/kuesioners/#{@kuesioner}"}
+  />
+</.modal>
+
+<.modal
+  :if={@live_action == :pilih_nama_data}
+  id="tambah-nama-data-kuesioner-modal"
+  show
+  on_cancel={JS.patch(~p"/kuesioners/#{@kuesioner}")}
+>
+  <.live_component
+    module={SurveyWeb.KuesionerLive.PilihNamaData}
+    id={"pilih-nama_data-#{@kuesioner.id}"}
     title={@page_title}
     action={@live_action}
     kuesioner={@kuesioner}

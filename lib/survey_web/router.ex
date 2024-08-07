@@ -110,6 +110,7 @@ defmodule SurveyWeb.Router do
 
       live "/kuesioners/:id", KuesionerLive.Show, :show
       live "/kuesioners/:id/show/edit", KuesionerLive.Show, :edit
+      live "/kuesioners/:id/pilih_nama_data", KuesionerLive.Show, :pilih_nama_data
 
       live "/kuesioners/:id/respons_kuesioner", KuesionerLive.ResponsKuesioner, :respons_kuesioner
 
