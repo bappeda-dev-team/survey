@@ -1,0 +1,26 @@
+<.header>
+  Listing Kuesioners
+  <:actions>
+    <.link href={~p"/kuesioners/new"}>
+      <.button>New Kuesioner</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="kuesioners" rows={@kuesioners} row_click={&JS.navigate(~p"/kuesioners/#{&1}")}>
+  <:col :let={kuesioner} label="Judul"><%= kuesioner.judul %></:col>
+  <:col :let={kuesioner} label="Penyelenggara"><%= kuesioner.penyelenggara %></:col>
+  <:col :let={kuesioner} label="Tahun"><%= kuesioner.tahun %></:col>
+  <:col :let={kuesioner} label="Deskripsi"><%= kuesioner.deskripsi %></:col>
+  <:action :let={kuesioner}>
+    <div class="sr-only">
+      <.link navigate={~p"/kuesioners/#{kuesioner}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/kuesioners/#{kuesioner}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={kuesioner}>
+    <.link href={~p"/kuesioners/#{kuesioner}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

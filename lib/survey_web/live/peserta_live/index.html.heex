@@ -12,6 +12,9 @@
   rows={@streams.pesertas}
   row_click={fn {_id, peserta} -> JS.navigate(~p"/pesertas/#{peserta}") end}
 >
+  <:col :let={{_id, peserta}} label="Kuesioner">
+    <%= judul_kuesioner(kuesioner_id: peserta.kuesioner_id) %>
+  </:col>
   <:col :let={{_id, peserta}} label="Nama peserta"><%= peserta.nama_peserta %></:col>
   <:col :let={{_id, peserta}} label="Kode peserta (identitas peserta)">
     <%= peserta.kode_peserta %>

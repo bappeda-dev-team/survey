@@ -1,0 +1,12 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:judul]} type="text" label="Judul" />
+  <.input field={f[:penyelenggara]} type="text" label="Penyelenggara" />
+  <.input field={f[:tahun]} type="number" label="Tahun" />
+  <.input field={f[:deskripsi]} type="text" label="Deskripsi" />
+  <:actions>
+    <.button>Save Kuesioner</.button>
+  </:actions>
+</.simple_form>

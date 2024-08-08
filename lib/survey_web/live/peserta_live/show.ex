@@ -18,4 +18,8 @@ defmodule SurveyWeb.PesertaLive.Show do
 
   defp page_title(:show), do: "Show Peserta"
   defp page_title(:edit), do: "Edit Peserta"
+
+  defp judul_kuesioner(kuesioner_id: kuesioner_id) do
+    Survey.Kuesioners.judul_kuesioner_peserta(kuesioner_id)
+  end
 end

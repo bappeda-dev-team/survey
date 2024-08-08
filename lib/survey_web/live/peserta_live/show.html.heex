@@ -7,6 +7,9 @@
 </.header>
 
 <.list>
+  <:item title="Kuesioner">
+    <%= judul_kuesioner(kuesioner_id: @peserta.kuesioner_id) %>
+  </:item>
   <:item title="Jenis identitas"><%= @peserta.jenis_identitas %></:item>
   <:item title="Kode peserta"><%= @peserta.kode_peserta %></:item>
   <:item title="Nama peserta"><%= @peserta.nama_peserta %></:item>

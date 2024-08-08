@@ -44,4 +44,8 @@ defmodule SurveyWeb.PesertaLive.Index do
 
     {:noreply, stream_delete(socket, :pesertas, peserta)}
   end
+
+  defp judul_kuesioner(kuesioner_id: kuesioner_id) do
+    Survey.Kuesioners.judul_kuesioner_peserta(kuesioner_id)
+  end
 end

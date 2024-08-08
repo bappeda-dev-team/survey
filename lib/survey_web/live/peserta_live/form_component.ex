@@ -19,6 +19,12 @@ defmodule SurveyWeb.PesertaLive.FormComponent do
         phx-submit="save"
       >
         <.input
+          field={@form[:kuesioner_id]}
+          type="select"
+          options={kuesioner_opts()}
+          label="Kuesioner"
+        />
+        <.input
           field={@form[:tahun]}
           type="select"
           options={Respons.tahun_peserta_opts()}
@@ -97,4 +103,9 @@ defmodule SurveyWeb.PesertaLive.FormComponent do
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
+
+  defp kuesioner_opts() do
+    for ks <- Survey.Kuesioners.list_kuesioners(),
+        do: [key: ks.judul, value: ks.id]
+  end
 end

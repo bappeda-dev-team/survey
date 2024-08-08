@@ -35,8 +35,10 @@ defmodule Survey.Kuesioners do
       ** (Ecto.NoResultsError)
 
   """
-  def get_kuesioner!(id),
-    do: Repo.get!(Kuesioner, id) |> Repo.preload(nama_datas: [:bidang_urusan])
+  def get_kuesioner!(id) do
+    Repo.get!(Kuesioner, id)
+    |> Repo.preload([:pesertas, nama_datas: [:bidang_urusan]])
+  end
 
   @doc """
   Gets a single kuesioner with pertanyaan from nama_data.
@@ -330,5 +332,15 @@ defmodule Survey.Kuesioners do
   """
   def change_pertanyaan(%Pertanyaan{} = pertanyaan, attrs \\ %{}) do
     Pertanyaan.changeset(pertanyaan, attrs)
+  end
+
+  def judul_kuesioner_peserta(nil) do
+    "-"
+  end
+
+  def judul_kuesioner_peserta(kuesioner_id) do
+    kuesioner = get_kuesioner!(kuesioner_id)
+
+    if is_nil(kuesioner), do: "-", else: kuesioner.judul
   end
 end

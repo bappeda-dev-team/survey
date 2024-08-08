@@ -1,0 +1,8 @@
+<.header>
+  Edit Kuesioner <%= @kuesioner.id %>
+  <:subtitle>Use this form to manage kuesioner records in your database.</:subtitle>
+</.header>
+
+<.kuesioner_form changeset={@changeset} action={~p"/kuesioners/#{@kuesioner}"} />
+
+<.back navigate={~p"/kuesioners"}>Back to kuesioners</.back>

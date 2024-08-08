@@ -11,6 +11,7 @@ defmodule Survey.Kuesioners.Kuesioner do
     timestamps(type: :utc_datetime)
 
     has_many :nama_datas, Survey.Kuesioners.NamaData
+    has_many :pesertas, Survey.Respons.Peserta
   end
 
   @doc false

@@ -104,6 +104,7 @@ defmodule SurveyWeb.Router do
       live "/bidang_urusans/:id/show/edit", BidangUrusanLive.Show, :edit
 
       # kuesioners
+
       live "/kuesioners", KuesionerLive.Index, :index
       live "/kuesioners/new", KuesionerLive.Index, :new
       live "/kuesioners/:id/edit", KuesionerLive.Index, :edit
@@ -113,6 +114,11 @@ defmodule SurveyWeb.Router do
       live "/kuesioners/:id/pilih_nama_data", KuesionerLive.Show, :pilih_nama_data
 
       live "/kuesioners/:id/respons_kuesioner", KuesionerLive.ResponsKuesioner, :respons_kuesioner
+
+      get "/kuesioners/:id/input_survey", KuesionerController, :input_survey
+      post "/kuesioners/:id/simpan_jawaban_survey", KuesionerController, :simpan_jawaban_survey
+      patch "/kuesioners/:id/update_jawaban_survey", KuesionerController, :update_jawaban_survey
+      delete "/kuesioners/:id/hapus_jawaban_survey", KuesionerController, :hapus_jawaban_survey
 
       # nama_data
       live "/nama_datas", NamaDataLive.Index, :index
