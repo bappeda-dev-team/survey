@@ -343,4 +343,9 @@ defmodule Survey.Kuesioners do
 
     if is_nil(kuesioner), do: "-", else: kuesioner.judul
   end
+
+  def nama_data_opts() do
+    for data <- list_nama_datas(),
+        do: [key: data.nama_data, value: data.id]
+  end
 end

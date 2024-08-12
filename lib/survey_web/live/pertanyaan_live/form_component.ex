@@ -21,7 +21,7 @@ defmodule SurveyWeb.PertanyaanLive.FormComponent do
         <.input
           field={@form[:nama_data_id]}
           type="select"
-          options={nama_data_opts()}
+          options={Kuesioners.nama_data_opts()}
           label="Nama Data"
         />
         <.input field={@form[:kode_pertanyaan]} type="text" label="Kode pertanyaan" />
@@ -85,9 +85,4 @@ defmodule SurveyWeb.PertanyaanLive.FormComponent do
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
-
-  defp nama_data_opts() do
-    for data <- Survey.Kuesioners.list_nama_datas(),
-        do: [key: data.nama_data, value: data.id]
-  end
 end
