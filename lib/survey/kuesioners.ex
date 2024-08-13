@@ -83,7 +83,7 @@ defmodule Survey.Kuesioners do
   """
   def create_kuesioner(attrs \\ %{}) do
     %Kuesioner{}
-    |> Kuesioner.changeset(attrs)
+    |> change_kuesioner(attrs)
     |> Repo.insert()
   end
 
@@ -101,7 +101,7 @@ defmodule Survey.Kuesioners do
   """
   def update_kuesioner(%Kuesioner{} = kuesioner, attrs) do
     kuesioner
-    |> Kuesioner.changeset(attrs)
+    |> change_kuesioner(attrs)
     |> Repo.update()
   end
 
@@ -131,10 +131,37 @@ defmodule Survey.Kuesioners do
 
   """
   def change_kuesioner(%Kuesioner{} = kuesioner, attrs \\ %{}) do
-    Kuesioner.changeset(kuesioner, attrs)
+    nama_datas = list_nama_datas_by_id(attrs["nama_data_ids"])
+    pesertas = list_pesertas_by_id(attrs["peserta_ids"])
+
+    kuesioner
+    |> Repo.preload([:nama_datas, :pesertas])
+    |> Kuesioner.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:nama_datas, nama_datas)
+    |> Ecto.Changeset.put_assoc(:pesertas, pesertas)
   end
 
   alias Survey.Kuesioners.NamaData
+
+  def list_nama_datas_by_id(nil), do: []
+
+  def list_nama_datas_by_id(nama_data_ids) do
+    query =
+      from n in NamaData,
+        where: n.id in ^nama_data_ids
+
+    Repo.all(query)
+  end
+
+  def list_pesertas_by_id(nil), do: []
+
+  def list_pesertas_by_id(peserta_ids) do
+    query =
+      from n in Survey.Respons.Peserta,
+        where: n.id in ^peserta_ids
+
+    Repo.all(query)
+  end
 
   @doc """
   Returns the list of nama_datas.
@@ -347,5 +374,25 @@ defmodule Survey.Kuesioners do
   def nama_data_opts() do
     for data <- list_nama_datas(),
         do: [key: data.nama_data, value: data.id]
+  end
+
+  def nama_data_opts(changeset) do
+    existing_ids =
+      changeset
+      |> Ecto.Changeset.get_change(:nama_datas, [])
+      |> Enum.map(& &1.data.id)
+
+    for data <- list_nama_datas(),
+        do: [key: data.nama_data, value: data.id, selected: data.id in existing_ids]
+  end
+
+  def peserta_kuesioner_opts(changeset) do
+    existing_ids =
+      changeset
+      |> Ecto.Changeset.get_change(:pesertas, [])
+      |> Enum.map(& &1.data.id)
+
+    for peserta <- Survey.Respons.list_pesertas(),
+        do: [key: peserta.nama_peserta, value: peserta.id, selected: peserta.id in existing_ids]
   end
 end

@@ -10,8 +10,11 @@ defmodule Survey.Kuesioners.Kuesioner do
 
     timestamps(type: :utc_datetime)
 
-    has_many :nama_datas, Survey.Kuesioners.NamaData
     has_many :pesertas, Survey.Respons.Peserta
+
+    many_to_many :nama_datas, Survey.Kuesioners.NamaData,
+      join_through: "nama_data_kuesioners",
+      on_replace: :delete
   end
 
   @doc false
