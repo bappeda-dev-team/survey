@@ -18,14 +18,20 @@ defmodule SurveyWeb.PertanyaanLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
+        <.input field={@form[:kode_pertanyaan]} type="text" label="Kode pertanyaan" />
+        <.input field={@form[:pertanyaan]} type="text" label="Pertanyaan" />
         <.input
           field={@form[:nama_data_id]}
           type="select"
           options={Kuesioners.nama_data_opts()}
           label="Nama Data"
         />
-        <.input field={@form[:kode_pertanyaan]} type="text" label="Kode pertanyaan" />
-        <.input field={@form[:pertanyaan]} type="text" label="Pertanyaan" />
+        <.input
+          field={@form[:tipe_jawaban]}
+          type="select"
+          options={tipe_jawaban_opts()}
+          label="Tipe Jawaban"
+        />
         <:actions>
           <.button class="w-full" phx-disable-with="Menyimpan...">Simpan</.button>
         </:actions>
@@ -85,4 +91,8 @@ defmodule SurveyWeb.PertanyaanLive.FormComponent do
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
+
+  defp tipe_jawaban_opts() do
+    ["", "Pilihan", "Narasi"]
+  end
 end

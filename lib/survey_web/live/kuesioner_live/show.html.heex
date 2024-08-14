@@ -12,9 +12,16 @@
   <:item title="Penyelenggara"><%= @kuesioner.penyelenggara %></:item>
   <:item title="Tahun"><%= @kuesioner.tahun %></:item>
   <:item title="Deskripsi"><%= @kuesioner.deskripsi %></:item>
+  <:item title="Input Survey">
+    <.link navigate={~p"/kuesioners/#{@kuesioner}/input_survey"}>
+      <.button class="w-52 !bg-green-500 hover:!bg-green-700 active:!bg-green-900 ">
+        Input Survey
+      </.button>
+    </.link>
+  </:item>
   <:item title="Respons Survey">
     <.link navigate={~p"/kuesioners/#{@kuesioner}/respons_kuesioner"}>
-      <.button>Lihat Respon Survey</.button>
+      <.button class="w-52">Lihat Respon Survey</.button>
     </.link>
   </:item>
 </.list>
@@ -24,7 +31,7 @@
     Data Kuesioner
     <:actions>
       <.link patch={~p"/kuesioners/#{@kuesioner}/pilih_nama_data"} phx-click={JS.push_focus()}>
-        <.button class="!bg-sky-500 !hover:bg-sky-300">Pilih Nama Data</.button>
+        <.button class="!bg-sky-500 hover:!bg-sky-300">Pilih Nama Data</.button>
       </.link>
     </:actions>
   </.header>

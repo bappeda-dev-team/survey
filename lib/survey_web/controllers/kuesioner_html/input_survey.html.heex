@@ -1,13 +1,9 @@
 <.header>
-  List Responden - <%= @kuesioner.judul %>
-  <:subtitle><%= @kuesioner.keterangan %></:subtitle>
+  Responden <%= @kuesioner.judul %>
+  <:subtitle>Pilih Responden</:subtitle>
 </.header>
 
 <div id="responder-survey" class="overflow-y-auto px-4 sm:overflow-visible sm:px-0 my-16">
-  <.header>
-    Peserta Survey
-    <:subtitle>Pilih Responden</:subtitle>
-  </.header>
   <.table id="pesertas-survey" rows={@kuesioner.pesertas}>
     <:col :let={peserta} label="Nama peserta"><%= peserta.nama_peserta %></:col>
     <:col :let={peserta} label="Kode peserta (identitas peserta)">
@@ -15,7 +11,9 @@
     </:col>
     <:col :let={peserta} label="Keterangan"><%= peserta.keterangan %></:col>
     <:action :let={peserta}>
-      <.link patch={~p"/pesertas/#{peserta}/edit"}>Pilih</.link>
+      <.link navigate={~p"/kuesioners/#{@kuesioner}/input_jawaban_peserta/#{peserta}"}>
+        Pilih
+      </.link>
     </:action>
   </.table>
 </div>

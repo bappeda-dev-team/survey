@@ -116,6 +116,11 @@ defmodule SurveyWeb.Router do
       live "/kuesioners/:id/respons_kuesioner", KuesionerLive.ResponsKuesioner, :respons_kuesioner
 
       get "/kuesioners/:id/input_survey", KuesionerController, :input_survey
+
+      get "/kuesioners/:id/input_jawaban_peserta/:peserta_id",
+          KuesionerController,
+          :input_jawaban_peserta
+
       post "/kuesioners/:id/simpan_jawaban_survey", KuesionerController, :simpan_jawaban_survey
       patch "/kuesioners/:id/update_jawaban_survey", KuesionerController, :update_jawaban_survey
       delete "/kuesioners/:id/hapus_jawaban_survey", KuesionerController, :hapus_jawaban_survey

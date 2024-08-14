@@ -1,0 +1,51 @@
+<.header>
+  <%= @kuesioner.judul %>
+</.header>
+<.header>
+  Responden: <%= @peserta.nama_peserta %>
+</.header>
+
+<div id="jawaban-survey" class="my-5 grid gap-8">
+  <div
+    :for={nama_data <- @kuesioner.nama_datas}
+    class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+  >
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <%= nama_data.nama_data %>
+    </h5>
+
+    <div :for={pertanyaan <- nama_data.pertanyaans} class="border border-1 p-5 pertanyaan">
+      <div class="mt-14">
+        <dl class="-my-4 divide-y divide-zinc-200">
+          <div class="flex gap-4 py-4 text-sm leading-6 sm:gap-8">
+            <dt class="w-1/4 font-bold flex-none text-black-500">
+              <%= pertanyaan.pertanyaan %>
+            </dt>
+            <dd class="w-full text-zinc-700">
+              <div
+                :for={jawaban <- pertanyaan.jawabans}
+                class="flex items-center my-4 px-4 border border-gray-200 rounded dark:border-gray-700"
+              >
+                <input
+                  id="bordered-radio-1"
+                  type="radio"
+                  value=""
+                  name="bordered-radio"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  for="bordered-radio-1"
+                  class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >
+                  <%= jawaban.jawaban %>
+                </label>
+              </div>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<.back navigate={~p"/kuesioners/{@kuesioner}"}>Kembali</.back>

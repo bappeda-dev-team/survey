@@ -5,6 +5,7 @@ defmodule Survey.Kuesioners.Pertanyaan do
   schema "pertanyaans" do
     field :kode_pertanyaan, :string
     field :pertanyaan, :string
+    field :tipe_jawaban, :string
 
     timestamps(type: :utc_datetime)
 
@@ -18,8 +19,8 @@ defmodule Survey.Kuesioners.Pertanyaan do
   @doc false
   def changeset(pertanyaan, attrs) do
     pertanyaan
-    |> cast(attrs, [:kode_pertanyaan, :pertanyaan, :nama_data_id])
-    |> validate_required([:kode_pertanyaan, :pertanyaan, :nama_data_id])
+    |> cast(attrs, [:kode_pertanyaan, :pertanyaan, :tipe_jawaban, :nama_data_id])
+    |> validate_required([:kode_pertanyaan, :pertanyaan, :tipe_jawaban, :nama_data_id])
   end
 
   # defp prefix_kode_pertanyaan(pertanyaan) do

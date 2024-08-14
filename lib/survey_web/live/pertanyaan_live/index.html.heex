@@ -25,6 +25,9 @@
   <:col :let={{_id, pertanyaan}} label="Nama Data">
     <%= pertanyaan.nama_data.nama_data %>
   </:col>
+  <:col :let={{_id, pertanyaan}} label="Tipe Jawaban">
+    <%= pertanyaan.tipe_jawaban %>
+  </:col>
   <:action :let={{_id, pertanyaan}}>
     <div class="sr-only">
       <.link navigate={~p"/pertanyaans/#{pertanyaan}"}>Tampilkan</.link>

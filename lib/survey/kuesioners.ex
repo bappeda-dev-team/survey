@@ -37,7 +37,7 @@ defmodule Survey.Kuesioners do
   """
   def get_kuesioner!(id) do
     Repo.get!(Kuesioner, id)
-    |> Repo.preload([:pesertas, nama_datas: [:bidang_urusan]])
+    |> Repo.preload([:pesertas, nama_datas: [:bidang_urusan, pertanyaans: [:jawabans]]])
   end
 
   @doc """
