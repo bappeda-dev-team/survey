@@ -18,7 +18,10 @@ defmodule Survey.Kuesioners do
 
   """
   def list_kuesioners do
-    Repo.all(Kuesioner)
+    Kuesioner
+    |> order_by(asc: :inserted_at)
+    |> Repo.all()
+    |> Repo.preload(:pesertas)
   end
 
   @doc """
@@ -173,7 +176,9 @@ defmodule Survey.Kuesioners do
 
   """
   def list_nama_datas do
-    Repo.all(NamaData)
+    NamaData
+    |> order_by(asc: :inserted_at)
+    |> Repo.all()
     |> Repo.preload(:bidang_urusan)
     |> Enum.filter(fn nd -> not is_nil(nd.kode_bidang_urusan) end)
   end
@@ -272,7 +277,9 @@ defmodule Survey.Kuesioners do
 
   """
   def list_pertanyaans do
-    Repo.all(Pertanyaan)
+    Pertanyaan
+    |> order_by(asc: :id)
+    |> Repo.all()
     |> Repo.preload(:nama_data)
     |> Enum.filter(fn p -> not is_nil(p.nama_data_id) end)
   end
