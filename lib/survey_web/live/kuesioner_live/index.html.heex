@@ -16,7 +16,7 @@
   <:col :let={{_id, kuesioner}} label="Penyelenggara"><%= kuesioner.penyelenggara %></:col>
   <:col :let={{_id, kuesioner}} label="Tahun"><%= kuesioner.tahun %></:col>
   <:col :let={{_id, kuesioner}} label="Deskripsi"><%= kuesioner.deskripsi %></:col>
-  <:action :let={{id, kuesioner}}>
+  <:action :let={{_id, kuesioner}}>
     <%= if Enum.any?(kuesioner.pesertas) do %>
       <.link navigate={~p"/kuesioners/#{kuesioner}/input_survey"}>
         <.button class="!bg-green-500 hover:!bg-green-300">Input Survey</.button>
